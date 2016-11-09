@@ -251,6 +251,7 @@ void handleSpecialKeypress(int key, int x, int y) {
 
        switch (key) {
            case GLUT_KEY_LEFT:
+<<<<<<< HEAD
                 if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
@@ -353,4 +354,180 @@ void handleSpecialKeypress(int key, int x, int y) {
 
     /*Zerbait berria marraztu behar badu marrazteko*/
     glutPostRedisplay();
+=======
+
+           if(_selected_object == NULL){
+            printf("Ez dago objekturik.\n");
+        }else{
+            matrizea[0]=1;
+            matrizea[1]=0;
+            matrizea[2]=0;
+            matrizea[3]=0;
+            matrizea[4]=0;
+            matrizea[5]=1;
+            matrizea[6]=0;
+            matrizea[7]=0;
+            matrizea[8]=0;
+            matrizea[9]=0;
+            matrizea[10]=1; 
+            matrizea[11]=0;
+            matrizea[12]=-5;
+            matrizea[13]=0; 
+            matrizea[14]=0; 
+            matrizea[15]=1;
+            lagMatrizea = Stack_Top(_selected_object -> stack);
+                    /*lagMatrizea bider matrizea -> gorde pilan*/
+                    /*TODO: biderketa funtzioa*/
+                    /**/
+            Stack_Push(_selected_object->stack, matrizea);
+            printf("Elementu kopurua pilan: %d \n", _selected_object->stack->size);
+
+
+        }
+        break;
+
+        case GLUT_KEY_UP:
+        if(_selected_object == NULL){
+            printf("Ez dago objekturik.\n");
+        }else{
+            matrizea[0]=1;
+            matrizea[1]=0;
+            matrizea[2]=0;
+            matrizea[3]=0;
+            matrizea[4]=0;
+            matrizea[5]=1;
+            matrizea[6]=0;
+            matrizea[7]=0;
+            matrizea[8]=0;
+            matrizea[9]=0;
+            matrizea[10]=1; 
+            matrizea[11]=0;
+            matrizea[12]=0;
+            matrizea[13]=5; 
+            matrizea[14]=0; 
+            matrizea[15]=1;
+
+        }
+        break;
+
+
+        case GLUT_KEY_DOWN:
+        if(_selected_object == NULL){
+            printf("Ez dago objekturik.\n");
+        }else{
+
+            matrizea[0]=1;
+            matrizea[1]=0;
+            matrizea[2]=0;
+            matrizea[3]=0;
+            matrizea[4]=0;
+            matrizea[5]=1;
+            matrizea[6]=0;
+            matrizea[7]=0;
+            matrizea[8]=0;
+            matrizea[9]=0;
+            matrizea[10]=1; 
+            matrizea[11]=0;
+            matrizea[12]=0;
+            matrizea[13]=-5; 
+            matrizea[14]=0; 
+            matrizea[15]=1;
+
+        }
+        break;
+
+        case GLUT_KEY_RIGHT:
+        if(_selected_object == NULL){
+            printf("Ez dago objekturik.\n");
+        }else{
+            matrizea[0]=1;
+            matrizea[1]=0;
+            matrizea[2]=0;
+            matrizea[3]=0;
+            matrizea[4]=0;
+            matrizea[5]=1;
+            matrizea[6]=0;
+            matrizea[7]=0;
+            matrizea[8]=0;
+            matrizea[9]=0;
+            matrizea[10]=1; 
+            matrizea[11]=0;
+            matrizea[12]=5;
+            matrizea[13]=0; 
+            matrizea[14]=0; 
+            matrizea[15]=1;
+            
+        }
+
+        break;
+
+    }
+
+}
+
+
+
+else if (egoera == 1){
+// ============== BIRAKETA ============//
+
+   switch (key) {
+       case GLUT_KEY_LEFT:
+
+       if(_selected_object == NULL){
+        printf("Ez dago objekturik.\n");
+    }else{
+
+        matrizea[0]=1;
+        matrizea[1]=0;
+        matrizea[2]=0;
+        matrizea[3]=0;
+        matrizea[4]=0;
+        matrizea[5]=cos(90);
+        matrizea[6]=sin(90);
+        matrizea[7]=0;
+        matrizea[8]=0;
+        matrizea[9]=-sin(90);
+        matrizea[10]=cos(90); 
+        matrizea[11]=0;
+        matrizea[12]=0;
+        matrizea[13]=0; 
+        matrizea[14]=0; 
+        matrizea[15]=1;
+        Stack_Push(_selected_object->stack, matrizea);
+        printf("Elementu kopurua pilan: %d \n", _selected_object->stack->size);
+    }
+    break;
+
+    case GLUT_KEY_UP:
+    if(_selected_object == NULL){
+        printf("Ez dago objekturik.\n");
+    }else{
+            /*/*/
+    }
+    break;
+
+    case GLUT_KEY_DOWN:
+    if(_selected_object == NULL){
+        printf("Ez dago objekturik.\n");
+    }else{
+            /* */
+    }
+    break;
+
+    case GLUT_KEY_RIGHT:
+    if(_selected_object == NULL){
+        printf("Ez dago objekturik.\n");
+    }else{
+           /* */
+    }
+    break;
+}
+
+
+
+}
+
+    /*Zerbait berria marraztu behar badu marrazteko*/
+glutPostRedisplay();
+>>>>>>> 897cc24e0728ea071676ed260e474f503a6893d6
 }
