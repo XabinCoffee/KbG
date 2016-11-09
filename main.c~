@@ -6,6 +6,10 @@
 #include "io.h"
 #include "definitions.h"
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 897cc24e0728ea071676ed260e474f503a6893d6
 /** GLOBAL VARIABLES **/
 
 GLdouble _window_ratio;                     /*Control of window's proportions */

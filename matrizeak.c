@@ -82,7 +82,7 @@ void biraketa(int tekla){
 
 	//Teklaren arabera aldatu matrizea
 	switch(tekla){
-				case GLUT_KEY_UP: //tekla gora
+		case GLUT_KEY_UP: //tekla gora
 			m[5] = cos(M_PI/8);
 			m[6] = sin(M_PI/8);
 			m[9] = -sin(M_PI/8);
@@ -108,6 +108,7 @@ void biraketa(int tekla){
 			break;
 
 	Stack_Push(_selected_object-> stack,biderkatu(m)); //Biderkatu eta pilaratu
+	}
 }
 
 

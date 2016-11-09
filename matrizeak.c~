@@ -108,6 +108,7 @@ void biraketa(int tekla){
 			break;
 
 	Stack_Push(_selected_object-> stack,biderkatu(m)); //Biderkatu eta pilaratu
+	}
 }
 
 
