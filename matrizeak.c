@@ -30,7 +30,6 @@ GLdouble* biderkatu(GLdouble * transformazioa){
 			k++;
 		}
 	}
-
 	return biderkatuta;
 }
 
@@ -61,9 +60,16 @@ void translazioa(int tekla){
 			break;
 		case GLUT_KEY_RIGHT: //Tekla eskubira
 			m[12] = 1;
+			break;
+		case GLUT_KEY_PAGE_UP:
+			m[14] = 1;
+			break;
+		case GLUT_KEY_PAGE_DOWN:
+			m[14] = -1;
+			break;
 	}
 
-	Stack_Push(_selected_object-> stack,biderkatu(m)); //Biderkatu eta pilaratu
+	Stack_Push(_selected_object-> stack, biderkatu(m)); //Biderkatu eta pilaratu
 }
 
 void biraketa(int tekla){
@@ -106,6 +112,18 @@ void biraketa(int tekla){
 			m[8] = sin(M_PI/8);
 			m[10] = cos(M_PI/8);
 			break;
+		case GLUT_KEY_PAGE_UP:
+			m[0] = cos(M_PI/8);
+			m[1] = sin(M_PI/8);
+			m[4] = -sin(M_PI/8);
+			m[5] = cos(M_PI/8);
+			break;
+		case GLUT_KEY_PAGE_DOWN:
+			m[0] = cos(-M_PI/8);
+			m[1] = sin(-M_PI/8);
+			m[4] = sin(M_PI/8);
+			m[5] = cos(-M_PI/8);
+			break;
 	}
 
 	Stack_Push(_selected_object-> stack,biderkatu(m)); //Biderkatu eta pilaratu
@@ -139,6 +157,12 @@ void eskalatu(int tekla){
 			break;
 		case GLUT_KEY_RIGHT: //tekla eskubira
 			m[0] = 1.2;
+			break;
+		case GLUT_KEY_PAGE_UP:
+			m[10] = 1.2;
+			break;
+		case GLUT_KEY_PAGE_DOWN:
+			m[10] = 0.8;
 			break;
 	}
 

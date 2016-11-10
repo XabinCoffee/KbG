@@ -292,6 +292,23 @@ void handleSpecialKeypress(int key, int x, int y) {
                 translazioa(key);
             }
             break;
+
+        case GLUT_KEY_PAGE_UP:
+             if(_selected_object == NULL){
+                printf("Ez dago objekturik.\n");
+            }else{
+                translazioa(key);
+            }
+            break;
+
+        case GLUT_KEY_PAGE_DOWN:
+             if(_selected_object == NULL){
+                printf("Ez dago objekturik.\n");
+            }else{
+                translazioa(key);
+            }
+            break;
+
         }
 
     }
@@ -326,6 +343,22 @@ void handleSpecialKeypress(int key, int x, int y) {
                     biraketa(key);
                 }
                 break;
+
+            case GLUT_KEY_PAGE_UP:
+                 if(_selected_object == NULL){
+                    printf("Ez dago objekturik.\n");
+                }else{
+                    biraketa(key);
+                }
+                break;
+
+            case GLUT_KEY_PAGE_DOWN:
+                 if(_selected_object == NULL){
+                    printf("Ez dago objekturik.\n");
+                }else{
+                    biraketa(key);
+                }
+                break;
         }
     }
 
@@ -354,6 +387,22 @@ void handleSpecialKeypress(int key, int x, int y) {
                 break;
             case GLUT_KEY_RIGHT:
                 if(_selected_object == NULL){
+                    printf("Ez dago objekturik.\n");
+                }else{
+                    eskalatu(key);
+                }
+                break;
+
+            case GLUT_KEY_PAGE_UP:
+                 if(_selected_object == NULL){
+                    printf("Ez dago objekturik.\n");
+                }else{
+                    eskalatu(key);
+                }
+                break;
+
+            case GLUT_KEY_PAGE_DOWN:
+                 if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
                     eskalatu(key);
