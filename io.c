@@ -194,15 +194,15 @@ int egoera = 0;
         break;
 
 	case 26: /*CTRL + z*/
-		//Aldaketak desegiteko CTRL + Z erabiliz
-		if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
-			if(_selected_object != NULL){
-				if (_selected_object->stack->size > 1){
-	 				Stack_Pop(_selected_object->stack);	
-				}
+        //Aldaketak desegiteko CTRL + Z erabiliz
+        if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+		if(_selected_object != NULL){
+			if (_selected_object->stack->size > 1){
+ 				Stack_Pop(_selected_object->stack);	
 			}
 		}
-	break;
+        }
+        break;
 
         case '?':
         print_help();
