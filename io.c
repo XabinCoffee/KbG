@@ -16,6 +16,14 @@ extern GLdouble _ortho_z_min,_ortho_z_max;
 
 extern GLdouble * matrizea;
 
+
+char aldaketak = 'g';
+
+    /*
+        'g' = Globala
+        'l' = Lokala
+    */
+
 int egoera = 0;
     /*
         0 = traslazioa
@@ -241,6 +249,19 @@ int egoera = 0;
         case 84:  /*<T>*/
         egoera = 2;
         printf("Orain objektua eskalatu daiteke\n");
+        break;
+
+
+        case 71:   /*<G>*/
+        case 103: /*<g>*/
+        aldaketak='g';
+        printf("Aldaketak erreferentzi sistema globalarekin egingo dira\n");
+        break;
+
+        case 76:   /*<G>*/
+        case 108: /*<g>*/
+        aldaketak='l';
+        printf("Aldaketak erreferentzi sistema lokalean egingo dira\n");
         break;
 
         default:
