@@ -340,28 +340,28 @@ void handleSpecialKeypress(int key, int x, int y) {
                 if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
-                    biraketa(key);
+                    biraketa(key, aldaketak);
                 }
                 break;
             case GLUT_KEY_UP:
                 if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
-                    biraketa(key);
+                    biraketa(key, aldaketak);
                 }
                 break;
             case GLUT_KEY_DOWN:
                 if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
-                    biraketa(key);
+                    biraketa(key, aldaketak);
                 }
                 break;
             case GLUT_KEY_RIGHT:
                 if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
-                    biraketa(key);
+                    biraketa(key, aldaketak);
                 }
                 break;
 
@@ -369,7 +369,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                  if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
-                    biraketa(key);
+                    biraketa(key, aldaketak);
                 }
                 break;
 
@@ -377,7 +377,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                  if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
-                    biraketa(key);
+                    biraketa(key, aldaketak);
                 }
                 break;
         }
