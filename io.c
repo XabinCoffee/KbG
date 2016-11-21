@@ -235,31 +235,36 @@ char egoera = 'm';
 
         case 77: /*<M>*/
         case 109: /*<m>*/
-        egoera = 0;
+        if (egoera == 'm') break;
+        egoera = 'm';
         printf("Orain objektua mugitu daiteke\n");
         break;
         
         case 98: /*<b>*/
         case 66: /*<B>*/
-        egoera = 1;
+        if (egoera == 'b') break;
+        egoera = 'b';
         printf("Orain objektua biratu daiteke\n");
         break;
 
         case 116: /*<t>*/
         case 84:  /*<T>*/
-        egoera = 2;
+        if (egoera == 't') break;
+        egoera = 't';
         printf("Orain objektua eskalatu daiteke\n");
         break;
 
 
         case 71:   /*<G>*/
         case 103: /*<g>*/
+        if (aldaketak == 'g') break;
         aldaketak='g';
         printf("Aldaketak erreferentzi sistema globalarekin egingo dira\n");
         break;
 
-        case 76:   /*<G>*/
-        case 108: /*<g>*/
+        case 76:   /*<L>*/
+        case 108: /*<l>*/
+        if (aldaketak == 'l') break;
         aldaketak='l';
         printf("Aldaketak erreferentzi sistema lokalean egingo dira\n");
         break;
@@ -274,61 +279,58 @@ char egoera = 'm';
 
 /*To treat arrow keys*/
 void handleSpecialKeypress(int key, int x, int y) {
-    GLdouble * lagMatrizea = malloc(sizeof(GLdouble)*16);
-    GLint f, v, v_index;
-
 
     if (egoera == 'm'){
+        // ============= TRANSLAZIOA =============//
 
-
-       switch (key) {
-           case GLUT_KEY_LEFT:
+        switch (key) {
+            case GLUT_KEY_LEFT:
                 if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
-                    translazioa(key); //Traslazioa egin
+                    translazioa(key, aldaketak); //Traslazioa egin
                 }
             break;
 
-        case GLUT_KEY_UP:
-            if(_selected_object == NULL){
-                printf("Ez dago objekturik.\n");
-            }else{
-                translazioa(key);
-            }
-            break;
+            case GLUT_KEY_UP:
+                if(_selected_object == NULL){
+                    printf("Ez dago objekturik.\n");
+                }else{
+                    translazioa(key, aldaketak);
+                }
+                break;
 
-        case GLUT_KEY_DOWN:
-            if(_selected_object == NULL){
-                printf("Ez dago objekturik.\n");
-            }else{
-                translazioa(key);
-            }
-            break;
+            case GLUT_KEY_DOWN:
+                if(_selected_object == NULL){
+                    printf("Ez dago objekturik.\n");
+                }else{
+                    translazioa(key, aldaketak);
+                }
+                break;
 
-        case GLUT_KEY_RIGHT:
-            if(_selected_object == NULL){
-                printf("Ez dago objekturik.\n");
-            }else{
-                translazioa(key);
-            }
-            break;
+            case GLUT_KEY_RIGHT:
+                if(_selected_object == NULL){
+                    printf("Ez dago objekturik.\n");
+                }else{
+                    translazioa(key, aldaketak);
+                }
+                break;
 
-        case GLUT_KEY_PAGE_UP:
-             if(_selected_object == NULL){
-                printf("Ez dago objekturik.\n");
-            }else{
-                translazioa(key);
-            }
-            break;
+            case GLUT_KEY_PAGE_UP:
+                 if(_selected_object == NULL){
+                    printf("Ez dago objekturik.\n");
+                }else{
+                    translazioa(key, aldaketak);
+                }
+                break;
 
-        case GLUT_KEY_PAGE_DOWN:
-             if(_selected_object == NULL){
-                printf("Ez dago objekturik.\n");
-            }else{
-                translazioa(key);
-            }
-            break;
+            case GLUT_KEY_PAGE_DOWN:
+                 if(_selected_object == NULL){
+                    printf("Ez dago objekturik.\n");
+                }else{
+                    translazioa(key, aldaketak);
+                }
+                break;
 
         }
 
@@ -384,33 +386,34 @@ void handleSpecialKeypress(int key, int x, int y) {
     }
 
     else if(egoera == 't'){
+        // ============== ESKALAKETA ============//
         switch(key){
             case GLUT_KEY_LEFT:
                 if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
-                    eskalatu(key);
+                    eskalatu(key, aldaketak);
                 }
                 break;
             case GLUT_KEY_UP:
                 if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
-                    eskalatu(key);
+                    eskalatu(key, aldaketak);
                 }
                 break;
             case GLUT_KEY_DOWN:
                 if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
-                    eskalatu(key);
+                    eskalatu(key, aldaketak);
                 }
                 break;
             case GLUT_KEY_RIGHT:
                 if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
-                    eskalatu(key);
+                    eskalatu(key, aldaketak);
                 }
                 break;
 
@@ -418,7 +421,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                  if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
-                    eskalatu(key);
+                    eskalatu(key, aldaketak);
                 }
                 break;
 
@@ -426,7 +429,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                  if(_selected_object == NULL){
                     printf("Ez dago objekturik.\n");
                 }else{
-                    eskalatu(key);
+                    eskalatu(key, aldaketak);
                 }
                 break;
         }
