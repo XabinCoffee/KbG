@@ -49,7 +49,7 @@ GLdouble* biderkatuLokalki(GLdouble * transformazioa){
 	return biderkatuta;
 }
 
-void translazioa(int tekla){
+void translazioa(int tekla, char ref_sys){
 	GLdouble * m = malloc(sizeof(GLdouble)*16);
 
 	/*  IDENTITATE MATRIZEA
@@ -85,7 +85,8 @@ void translazioa(int tekla){
 			break;
 	}
 
-	Stack_Push(_selected_object-> stack, biderkatu(m)); //Biderkatu eta pilaratu
+	if (ref_sys == 'g') Stack_Push(_selected_object-> stack,biderkatu(m)); //Biderkatu eta pilaratu
+	else if (ref_sys == 'l') Stack_Push(_selected_object-> stack,biderkatuLokalki(m));
 }
 
 void biraketa(int tekla, char ref_sys){
@@ -147,7 +148,7 @@ void biraketa(int tekla, char ref_sys){
 }
 
 
-void eskalatu(int tekla){
+void eskalatu(int tekla, char ref_sys){
 	GLdouble * m = malloc(sizeof(GLdouble)*16);
 
 	/*  IDENTITATE MATRIZEA
@@ -183,5 +184,6 @@ void eskalatu(int tekla){
 			break;
 	}
 
-	Stack_Push(_selected_object-> stack,biderkatu(m)); //Biderkatu eta pilaratu
+	if (ref_sys == 'g') Stack_Push(_selected_object-> stack,biderkatu(m)); //Biderkatu eta pilaratu
+	else if (ref_sys == 'l') Stack_Push(_selected_object-> stack,biderkatuLokalki(m));
 }

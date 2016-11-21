@@ -383,7 +383,7 @@ void handleSpecialKeypress(int key, int x, int y) {
         }
     }
 
-    else if(egoera == 't'){
+    else if(egoera == 2){
         switch(key){
             case GLUT_KEY_LEFT:
                 if(_selected_object == NULL){
