@@ -8,16 +8,6 @@ extern object3d * _first_object;
 extern object3d * _selected_object;
 
 
-void inprimatu(GLdouble* matrizea){
-
-	printf("-----   MATRIZEA   ----\n");
-	//printf("%f  %f  %f  %f  %f \n", matrizea[0], matrizea[4], matrizea[8], matrizea[12]);
-	//printf("%f  %f  %f  %f  %f \n", matrizea[1], matrizea[5], matrizea[9], matrizea[13]);
-	//printf("%f  %f  %f  %f  %f \n", matrizea[2], matrizea[6], matrizea[10], matrizea[14]);
-	//printf("%f  %f  %f  %f  %f \n", matrizea[3], matrizea[7], matrizea[11], matrizea[15]);
-	printf("-----------------------\n");
-}
-
 GLdouble* biderkatu(GLdouble * transformazioa){
 	GLdouble * biderkatuta = malloc(sizeof(GLdouble)*16);
 	GLdouble * stackTop = Stack_Top(_selected_object-> stack);
@@ -58,6 +48,7 @@ void translazioa(int tekla, char ref_sys){
 		0  0  1  0
 		0  0  0  1
 	*/
+		
 	m[0] = 1;  m[4] = 0;  m[8] = 0;  m[12] = 0;
 	m[1] = 0;  m[5] = 1;  m[9] = 0;  m[13] = 0;
 	m[2] = 0;  m[6] = 0;  m[10] = 1;  m[14] = 0;
@@ -85,8 +76,8 @@ void translazioa(int tekla, char ref_sys){
 			break;
 	}
 
-	if (ref_sys == 'g') Stack_Push(_selected_object-> stack,biderkatu(m)); //Biderkatu eta pilaratu
-	else if (ref_sys == 'l') Stack_Push(_selected_object-> stack,biderkatuLokalki(m));
+	if (ref_sys == 'g') Stack_Push(_selected_object-> stack,biderkatu(m)); //Erreferentzi sistema globalean egin eragiketa eta ondoren pilaratu
+	else if (ref_sys == 'l') Stack_Push(_selected_object-> stack,biderkatuLokalki(m)); //Erreferentzi sistema lokalean egin eragiketa eta pilaratu
 }
 
 void biraketa(int tekla, char ref_sys){
@@ -143,7 +134,7 @@ void biraketa(int tekla, char ref_sys){
 			break;
 	}
 
-	if (ref_sys == 'g') Stack_Push(_selected_object-> stack,biderkatu(m)); //Biderkatu eta pilaratu
+	if (ref_sys == 'g') Stack_Push(_selected_object-> stack,biderkatu(m)); 
 	else if (ref_sys == 'l') Stack_Push(_selected_object-> stack,biderkatuLokalki(m));
 }
 
@@ -184,6 +175,17 @@ void eskalatu(int tekla, char ref_sys){
 			break;
 	}
 
-	if (ref_sys == 'g') Stack_Push(_selected_object-> stack,biderkatu(m)); //Biderkatu eta pilaratu
+	if (ref_sys == 'g') Stack_Push(_selected_object-> stack,biderkatu(m));
 	else if (ref_sys == 'l') Stack_Push(_selected_object-> stack,biderkatuLokalki(m));
 }
+
+
+/*void inprimatu(GLdouble* matrizea){
+
+	printf("-----   MATRIZEA   ----\n");
+	//printf("%f  %f  %f  %f  %f \n", matrizea[0], matrizea[4], matrizea[8], matrizea[12]);
+	//printf("%f  %f  %f  %f  %f \n", matrizea[1], matrizea[5], matrizea[9], matrizea[13]);
+	//printf("%f  %f  %f  %f  %f \n", matrizea[2], matrizea[6], matrizea[10], matrizea[14]);
+	//printf("%f  %f  %f  %f  %f \n", matrizea[3], matrizea[7], matrizea[11], matrizea[15]);
+	printf("-----------------------\n");
+}*/

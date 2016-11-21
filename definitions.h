@@ -7,7 +7,7 @@
 
 /** DEFINITIONS **/
 
-#define KG_WINDOW_TITLE                     "KbG Praktika - Xabin Rodriguez && Benat Zaldua"
+#define KG_WINDOW_TITLE                     "KbG Praktika - Xabin Rodriguez & Benat Zaldua"
 #define KG_WINDOW_WIDTH                     640
 #define KG_WINDOW_HEIGHT                    480
 #define KG_WINDOW_X                         50
@@ -16,8 +16,8 @@
 #define KG_MSSG_SELECT_FILE                 "Idatz ezazu fitxategiaren path-a: "
 #define KG_MSSG_FILENOTFOUND                "Fitxategi hori ez da existitzen!!"
 #define KG_MSSG_INVALIDFILE                 "Arazoren bat egon da fitxategiarekin ..."
-#define KG_MSSG_EMPTYFILE                   "Fitxategia utsik dago"
-#define KG_MSSG_FILEREAD                    "Fitxategiaren irakurketa buruta"
+#define KG_MSSG_EMPTYFILE                   "Fitxategia hutsik dago"
+#define KG_MSSG_FILEREAD                    "Fitxategiaren irakurketa burutua"
 
 #define KG_STEP_MOVE                        5.0f
 #define KG_STEP_ROTATE                      10.0f
@@ -116,7 +116,7 @@ struct object3d{
     point3 min;                         /* coordinates' lower bounds */
     point3 max;                         /* coordinates' bigger bounds */
     char *name;
-    struct Stack *stack;
+    struct Stack *stack;                /* Objetu bakoitzaren pila, bertan transformazio matrizeak gordetzen joateko */
     struct object3d *next;              /* next element in the pile of objects */
 };
 

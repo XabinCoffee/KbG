@@ -25,6 +25,7 @@ char aldaketak = 'g';
     */
 
 char egoera = 'm';
+
     /*	Momentuan ze transformazio dagoen aukeratuta.
         'm' = traslazioa
         'b' = biraketa
@@ -41,7 +42,7 @@ char egoera = 'm';
     printf("aldatzen eta bistaratzen ditu.  \n\n");
 
     printf("Egilea: Borja Calvo (borja.calvo@ehu.es) \n");
-    printf("Salseatzen ibili diren ikasleak: Xabin Rodriguez eta B Zaldua \n");
+    printf("Salseatzen ibili diren ikasleak: Xabin Rodriguez eta Benat Zaldua \n");
     printf("Data: Urria, 2016 \n");
     printf("\n\n");
     printf("FUNTZIO NAGUSIAK \n");
@@ -56,6 +57,8 @@ char egoera = 'm';
     printf("<M> edo <m>\t Mugitzeko\n");
     printf("<B> edo <b>\t Biratzeko\n");
     printf("<T> edo <t>\t Eskalatzeko\n");
+    printf("<G> edo <g>\t Aldaketak modu globalean egiteko\n");
+    printf("<L> edo <l>\t Aldaketak objetuaren erreferentzi sistema beran egiteko\n");
     printf("\n\n");
 }
 
@@ -277,7 +280,11 @@ char egoera = 'm';
     glutPostRedisplay();
 }
 
-/*To treat arrow keys*/
+/**
+ * @brief Treating arrow keys/PageUp, PageDown
+ * @param key Special Key that has been pressed
+ */
+
 void handleSpecialKeypress(int key, int x, int y) {
 
     if (egoera == 'm'){
