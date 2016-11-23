@@ -59,6 +59,8 @@ char egoera = 'm';
     printf("<T> edo <t>\t Eskalatzeko\n");
     printf("<G> edo <g>\t Aldaketak modu globalean egiteko\n");
     printf("<L> edo <l>\t Aldaketak objetuaren erreferentzi sistema beran egiteko\n");
+    printf("<CTRL + Z>\t Egindako aldaketak desegiteko\n");
+    printf("<CTRL + Y>\t Desegindako aldaketak berriz aplikatzeko\n");
     printf("\n\n");
 }
 
@@ -122,9 +124,12 @@ char egoera = 'm';
             matrizea[15]=1;
             /*Hasierako puntua gorde pilan*/
             struct Stack *pila = malloc(sizeof(Stack));
+            struct Stack *desegin = malloc(sizeof(Stack));
             Stack_Init(pila);
+            Stack_Init(desegin);
             Stack_Push(pila, matrizea);
             _selected_object->stack = pila;
+            _selected_object->desegin = desegin;
             printf("%s\n",KG_MSSG_FILEREAD);
             break;
         }
@@ -209,11 +214,28 @@ char egoera = 'm';
         if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
 		if(_selected_object != NULL){
 			if (_selected_object->stack->size > 1){
+                Stack_Push(_selected_object->desegin,Stack_Top(_selected_object->stack));
  				Stack_Pop(_selected_object->stack);	
 			}
 		}
         }
         break;
+
+
+    case 25: /*CTRL + y*/
+        //Desegindako aldaketak berreskuratzeko
+        if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+        if(_selected_object != NULL){
+            if (_selected_object->desegin->size > 1){
+                GLdouble *m = malloc(sizeof(GLdouble));
+                m = Stack_Top(_selected_object->desegin);
+                Stack_Pop(_selected_object->desegin); 
+                Stack_Push(_selected_object->stack,m);
+            }
+        }
+        }
+        break;
+
 
         case '?':
         print_help();
@@ -296,6 +318,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     translazioa(key, aldaketak); //Traslazioa egin
+                    Stack_Init(_selected_object->desegin);
                 }
             break;
 
@@ -304,6 +327,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     translazioa(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
 
@@ -312,6 +336,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     translazioa(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
 
@@ -320,6 +345,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     translazioa(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
 
@@ -328,6 +354,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     translazioa(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
 
@@ -336,6 +363,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     translazioa(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
 
@@ -350,6 +378,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     biraketa(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
             case GLUT_KEY_UP:
@@ -357,6 +386,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     biraketa(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
             case GLUT_KEY_DOWN:
@@ -364,6 +394,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     biraketa(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
             case GLUT_KEY_RIGHT:
@@ -371,6 +402,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     biraketa(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
 
@@ -379,6 +411,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     biraketa(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
 
@@ -387,6 +420,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     biraketa(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
         }
@@ -400,6 +434,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     eskalatu(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
             case GLUT_KEY_UP:
@@ -407,6 +442,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     eskalatu(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
             case GLUT_KEY_DOWN:
@@ -414,6 +450,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     eskalatu(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
             case GLUT_KEY_RIGHT:
@@ -421,6 +458,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     eskalatu(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
 
@@ -429,6 +467,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     eskalatu(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
 
@@ -437,6 +476,7 @@ void handleSpecialKeypress(int key, int x, int y) {
                     printf("Ez dago objekturik.\n");
                 }else{
                     eskalatu(key, aldaketak);
+                    Stack_Init(_selected_object->desegin);
                 }
                 break;
         }

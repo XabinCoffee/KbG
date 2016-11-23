@@ -115,8 +115,9 @@ struct object3d{
     face *face_table;                   /* table of faces */
     point3 min;                         /* coordinates' lower bounds */
     point3 max;                         /* coordinates' bigger bounds */
-    char *name;
+    char *name;                         /* Fitxategiaren path-a gordetzeko*/
     struct Stack *stack;                /* Objetu bakoitzaren pila, bertan transformazio matrizeak gordetzen joateko */
+    struct Stack *desegin;              /*Ctrl+Z egiterakoan, desegindako aldaketak hemen gordeko dira, geroago berreskuratu nahi badira*/
     struct object3d *next;              /* next element in the pile of objects */
 };
 
