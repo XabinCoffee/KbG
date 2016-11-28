@@ -16,6 +16,8 @@ extern object3d *_selected_object;
 
 extern GLdouble * matrizea;
 
+extern kam_mota;
+
 /**
  * @brief Function to draw the axes
  */
@@ -70,21 +72,21 @@ void display(void) {
     glLoadIdentity();
 
     /*When the window is wider than our original projection plane we extend the plane in the X axis*/
-    if ((_ortho_x_max - _ortho_x_min) / (_ortho_y_max - _ortho_y_min) < _window_ratio) {
-        /* New width */
-        GLdouble wd = (_ortho_y_max - _ortho_y_min) * _window_ratio;
+   // if ((_ortho_x_max - _ortho_x_min) / (_ortho_y_max - _ortho_y_min) < _window_ratio) {
+     //   /* New width */
+       // GLdouble wd = (_ortho_y_max - _ortho_y_min) * _window_ratio;
         /* Midpoint in the X axis */
-        GLdouble midpt = (_ortho_x_min + _ortho_x_max) / 2;
+       // GLdouble midpt = (_ortho_x_min + _ortho_x_max) / 2;
         /*Definition of the projection*/
-        glOrtho(midpt - (wd / 2), midpt + (wd / 2), _ortho_y_min, _ortho_y_max, _ortho_z_min, _ortho_z_max);
-    } else {/* In the opposite situation we extend the Y axis */
+       // glOrtho(midpt - (wd / 2), midpt + (wd / 2), _ortho_y_min, _ortho_y_max, _ortho_z_min, _ortho_z_max);
+  //  } else {/* In the opposite situation we extend the Y axis */
         /* New height */
-        GLdouble he = (_ortho_x_max - _ortho_x_min) / _window_ratio;
+    //    GLdouble he = (_ortho_x_max - _ortho_x_min) / _window_ratio;
         /* Midpoint in the Y axis */
-        GLdouble midpt = (_ortho_y_min + _ortho_y_max) / 2;
+     //   GLdouble midpt = (_ortho_y_min + _ortho_y_max) / 2;
         /*Definition of the projection*/
-        glOrtho(_ortho_x_min, _ortho_x_max, midpt - (he / 2), midpt + (he / 2), _ortho_z_min, _ortho_z_max);
-    }
+      //  glOrtho(_ortho_x_min, _ortho_x_max, midpt - (he / 2), midpt + (he / 2), _ortho_z_min, _ortho_z_max);
+    //}
 
     /* Now we start drawing the object */
     glMatrixMode(GL_MODELVIEW);
@@ -123,4 +125,32 @@ void display(void) {
     }
     /*Do the actual drawing*/
     glFlush();
+}
+
+void kamaraMugitu(){
+    switch(kam_mota){
+        case 'o':
+            /*When the window is wider than our original projection plane we extend the plane in the X axis*/
+            if ((_ortho_x_max - _ortho_x_min) / (_ortho_y_max - _ortho_y_min) < _window_ratio) {
+                /* New width */
+                GLdouble wd = (_ortho_y_max - _ortho_y_min) * _window_ratio;
+                /* Midpoint in the X axis */
+                GLdouble midpt = (_ortho_x_min + _ortho_x_max) / 2;
+                /*Definition of the projection*/
+                glOrtho(midpt - (wd / 2), midpt + (wd / 2), _ortho_y_min, _ortho_y_max, _ortho_z_min, _ortho_z_max);
+            } else {/* In the opposite situation we extend the Y axis */
+                /* New height */
+                GLdouble he = (_ortho_x_max - _ortho_x_min) / _window_ratio;
+                /* Midpoint in the Y axis */
+                GLdouble midpt = (_ortho_y_min + _ortho_y_max) / 2;
+                /*Definition of the projection*/
+                glOrtho(_ortho_x_min, _ortho_x_max, midpt - (he / 2), midpt + (he / 2), _ortho_z_min, _ortho_z_max);
+            }
+            break;
+
+        case 'b':
+            gluPerspective(20,1,1,100);
+            
+    }
+
 }

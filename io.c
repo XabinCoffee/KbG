@@ -16,6 +16,14 @@ extern GLdouble _ortho_z_min,_ortho_z_max;
 
 extern GLdouble * matrizea;
 
+extern char kam_mota = 'o';
+
+    /*
+        'o' = ortografikoa
+        'b' = objektu-mota
+        'i' = ibiltaria
+    */
+
 
 char aldaketak = 'g';
 
@@ -30,14 +38,6 @@ char egoera = 'm';
         'm' = traslazioa
         'b' = biraketa
         't' = eskalaketa
-    */
-
-char kam_mota = 'o';
-
-    /*
-        'o' = ortografikoa
-        'b' = objektu-mota
-        'i' = ibiltaria
     */
 
 
