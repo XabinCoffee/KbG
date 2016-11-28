@@ -117,10 +117,19 @@ struct object3d{
     point3 max;                         /* coordinates' bigger bounds */
     char *name;                         /* Fitxategiaren path-a gordetzeko*/
     struct Stack *stack;                /* Objetu bakoitzaren pila, bertan transformazio matrizeak gordetzen joateko */
-    struct Stack *desegin;              /*Ctrl+Z egiterakoan, desegindako aldaketak hemen gordeko dira, geroago berreskuratu nahi badira*/
+    struct Stack *desegin;              /* Ctrl+Z egiterakoan, desegindako aldaketak hemen gordeko dira, geroago berreskuratu nahi badira*/
     struct object3d *next;              /* next element in the pile of objects */
 };
 
 typedef struct object3d object3d;
+
+struct cam{
+    GLdouble* posizioa;         /* Kamara zein puntutan dagoen */
+    GLdouble* begira;           /* Nora begira dagoen */
+    GLdouble* gora;             /* Kamararen gora bektorea */            
+    struct Stack *stack;    /* Aldaketa pila */
+};
+
+typedef struct cam cam;
 
 #endif // DEFINITIONS_H
