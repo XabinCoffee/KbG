@@ -32,6 +32,14 @@ char egoera = 'm';
         't' = eskalaketa
     */
 
+char kam_mota = 'o';
+
+    /*
+        'o' = ortografikoa
+        'b' = objektu-mota
+        'i' = ibiltaria
+    */
+
 
 /**
  * @brief This function just prints information about the use
