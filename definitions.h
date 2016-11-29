@@ -123,13 +123,13 @@ struct object3d{
 
 typedef struct object3d object3d;
 
-struct cam{
+struct PerspCam{
     GLdouble* posizioa;         /* Kamara zein puntutan dagoen */
     GLdouble* begira;           /* Nora begira dagoen */
     GLdouble* gora;             /* Kamararen gora bektorea */            
     struct Stack *stack;    /* Aldaketa pila */
 };
 
-typedef struct cam cam;
+typedef struct PerspCam PerspCam;
 
 #endif // DEFINITIONS_H

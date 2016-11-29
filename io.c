@@ -16,29 +16,9 @@ extern GLdouble _ortho_z_min,_ortho_z_max;
 
 extern GLdouble * matrizea;
 
-extern char kam_mota = 'o';
-
-    /*
-        'o' = ortografikoa
-        'b' = objektu-mota
-        'i' = ibiltaria
-    */
-
-
-char aldaketak = 'g';
-
-    /* Aldaketak ze erreferentzi sistema erabilita egingo diren.
-        'g' = Globala
-        'l' = Lokala
-    */
-
-char egoera = 'm';
-
-    /*	Momentuan ze transformazio dagoen aukeratuta.
-        'm' = traslazioa
-        'b' = biraketa
-        't' = eskalaketa
-    */
+extern char kam_mota;
+extern char aldaketak;
+extern char egoera;
 
 
 /**

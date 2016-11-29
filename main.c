@@ -18,6 +18,37 @@ object3d * _selected_object = 0;            /*Object currently selected*/
 
 GLdouble * matrizea;
 
+GLdouble fovy;
+GLdouble aspect;
+GLdouble znear;
+GLdouble zfar;
+
+
+char kam_mota = 'o';
+
+    /*
+        'o' = ortografikoa
+        'b' = objektu-mota
+        'i' = ibiltaria
+    */
+
+
+char aldaketak = 'g';
+
+    /* Aldaketak ze erreferentzi sistema erabilita egingo diren.
+        'g' = Globala
+        'l' = Lokala
+    */
+
+char egoera = 'm';
+
+    /*  Momentuan ze transformazio dagoen aukeratuta.
+        'm' = traslazioa
+        'b' = biraketa
+        't' = eskalaketa
+    */
+
+
 /** GENERAL INITIALIZATION **/
 void initialization (){
 
@@ -36,6 +67,13 @@ void initialization (){
 
     /*Definition of the method to draw the objects*/
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    /* Perspektiba kamararentzat hasieraketak */
+
+    fovy = 30;
+    aspect = _window_ratio;
+    znear = 10;
+    zfar = 100;
 }
 
 
