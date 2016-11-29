@@ -282,6 +282,24 @@ extern char egoera;
         printf("Aldaketak erreferentzi sistema lokalean egingo dira\n");
         break;
 
+        case 99:   /*<c>*/
+        case 67: /*<C>*/
+        if (kam_mota == 'o') {
+            kam_mota = 'b';
+            printf("Objektu-kamara \n");
+
+        }
+        else if(kam_mota=='b'){
+            kam_mota = 'i';
+            printf("Kamara ibiltaria \n");
+        }
+        else {
+            kam_mota = 'o';
+            printf("Kamara ortogonala \n");
+        }
+
+        break;
+
         default:
         /*In the default case we just print the code of the key. This is usefull to define new cases*/
         printf("%d %c\n", key, key);

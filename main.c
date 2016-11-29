@@ -23,8 +23,10 @@ GLdouble aspect;
 GLdouble znear;
 GLdouble zfar;
 
+PerspCam *objKam;
 
-char kam_mota = 'o';
+
+char kam_mota;
 
     /*
         'o' = ortografikoa
@@ -33,14 +35,14 @@ char kam_mota = 'o';
     */
 
 
-char aldaketak = 'g';
+char aldaketak;
 
     /* Aldaketak ze erreferentzi sistema erabilita egingo diren.
         'g' = Globala
         'l' = Lokala
     */
 
-char egoera = 'm';
+char egoera;
 
     /*  Momentuan ze transformazio dagoen aukeratuta.
         'm' = traslazioa
@@ -60,6 +62,40 @@ void initialization (){
     _ortho_z_min = KG_ORTHO_Z_MIN_INIT;
     _ortho_z_max = KG_ORTHO_Z_MAX_INIT;
 
+    /* Hasierako transformazio aldagaiak */
+    kam_mota = 'o';
+    egoera = 'm';
+    aldaketak = 'g';
+
+    /* Persp. kamararen balioak */
+
+    objKam = malloc(sizeof(PerspCam));
+    Stack *p = malloc(sizeof(Stack));
+    Stack_Init(p);
+    objKam->stack = p;
+    objKam->posizioa = malloc(sizeof(GLdouble)*4);
+    objKam->begira = malloc(sizeof(GLdouble)*4);
+    objKam->gora = malloc(sizeof(GLdouble)*4);
+
+    objKam->posizioa[0]=0; objKam->posizioa[1]=0; objKam->posizioa[2]=-50; objKam->posizioa[3]=1;
+    objKam->begira[0]=0; objKam->begira[1]=0; objKam->begira[2]=50; objKam->begira[3]=1;
+    objKam->gora[0]=0; objKam->gora[1]=1; objKam->gora[2]=0; objKam->gora[3]=0;
+    GLdouble *matrix = malloc(sizeof(GLdouble)*16);
+
+    //Kamararen hasierako matrizea
+    matrix[0] = 1; matrix[4] = 0;  matrix[8] = 0; matrix[12] = 0; 
+    matrix[1] = 0; matrix[5] = 1;  matrix[9] = 0; matrix[13] = 0; 
+    matrix[2] = 0; matrix[6] = 0;  matrix[10] = 1; matrix[14] = -50; 
+    matrix[3] = 0; matrix[7] = 0;  matrix[11] = 0; matrix[15] = 1; 
+    Stack_Push(objKam->stack, matrix);
+
+
+    fovy = 20;
+    aspect = _window_ratio;
+    znear = 10;
+    zfar = 100;
+
+
     _window_ratio = (GLdouble) KG_WINDOW_WIDTH / (GLdouble) KG_WINDOW_HEIGHT;
 
     /*Definition of the background color*/
@@ -70,10 +106,7 @@ void initialization (){
 
     /* Perspektiba kamararentzat hasieraketak */
 
-    fovy = 30;
-    aspect = _window_ratio;
-    znear = 10;
-    zfar = 100;
+
 }
 
 
