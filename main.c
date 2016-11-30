@@ -24,6 +24,7 @@ GLdouble znear;
 GLdouble zfar;
 
 PerspCam *objKam;
+GLdouble *matrix;
 
 
 char kam_mota;

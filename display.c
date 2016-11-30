@@ -23,6 +23,7 @@ extern GLdouble aspect;
 
 extern kam_mota;
 
+extern PerspCam *objKam;
 
 /**
  * @brief Function to draw the axes
@@ -97,9 +98,11 @@ void display(void) {
             }
             break;
 
-        case 'b':
-
+        case 'b': ;
+            GLdouble * matrize = malloc(sizeof(GLdouble)*16);
             gluPerspective(fovy,aspect,znear,zfar);
+            matrize = biderkatuKamera();
+            gluLookAt(matrize[0],matrize[1],matrize[2],matrize[4],matrize[5],matrize[6],matrize[8],matrize[9],matrize[10]);
             break;
 
         case 'i':
