@@ -63,21 +63,7 @@ void reshape(int width, int height) {
     _window_ratio = (GLdouble) width / (GLdouble) height;
 }
 
-
-/**
- * @brief Callback display function
- */
-void display(void) {
-    GLint v_index, v, f;
-    object3d *aux_obj = _first_object;
-
-    /* Clear the screen */
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    /* Define the projection */
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-
+void kamaraKokatu(){
      switch(kam_mota){
         case 'o':
             /*When the window is wider than our original projection plane we extend the plane in the X axis*/
@@ -99,18 +85,34 @@ void display(void) {
             break;
 
         case 'b': ;
-            GLdouble * matrize = malloc(sizeof(GLdouble)*16);
+           /* GLdouble * matrize = malloc(sizeof(GLdouble)*16);
             gluPerspective(fovy,aspect,znear,zfar);
             matrize = biderkatuKamera();
             gluLookAt(matrize[0],matrize[1],matrize[2],matrize[4],matrize[5],matrize[6],matrize[8],matrize[9],matrize[10]);
-            break;
+            */break;
 
         case 'i':
 
             break;
 
         }
+}
 
+/**
+ * @brief Callback display function
+ */
+void display(void) {
+    GLint v_index, v, f;
+    object3d *aux_obj = _first_object;
+
+    /* Clear the screen */
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    /* Define the projection */
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+
+    kamaraKokatu();
 
     /* Now we start drawing the object */
     glMatrixMode(GL_MODELVIEW);

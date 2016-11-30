@@ -52,17 +52,7 @@ char egoera;
     */
 
 
-/** GENERAL INITIALIZATION **/
-void initialization (){
-
-    /*Initialization of all the variables with the default values*/
-    _ortho_x_min = KG_ORTHO_X_MIN_INIT;
-    _ortho_x_max = KG_ORTHO_X_MAX_INIT;
-    _ortho_y_min = KG_ORTHO_Y_MIN_INIT;
-    _ortho_y_max = KG_ORTHO_Y_MAX_INIT;
-    _ortho_z_min = KG_ORTHO_Z_MIN_INIT;
-    _ortho_z_max = KG_ORTHO_Z_MAX_INIT;
-
+void gureHasieraketak(){
     /* Hasierako transformazio aldagaiak */
     kam_mota = 'o';
     egoera = 'm';
@@ -78,15 +68,16 @@ void initialization (){
     objKam->begira = malloc(sizeof(GLdouble)*4);
     objKam->gora = malloc(sizeof(GLdouble)*4);
 
-    objKam->posizioa[0]=0; objKam->posizioa[1]=0; objKam->posizioa[2]=-50; objKam->posizioa[3]=1;
-    objKam->begira[0]=0; objKam->begira[1]=0; objKam->begira[2]=50; objKam->begira[3]=1;
+    objKam->posizioa[0]=1; objKam->posizioa[1]=1; objKam->posizioa[2]=50; objKam->posizioa[3]=1;
+    objKam->begira[0]=1; objKam->begira[1]=1; objKam->begira[2]=50; objKam->begira[3]=1;
     objKam->gora[0]=0; objKam->gora[1]=1; objKam->gora[2]=0; objKam->gora[3]=0;
+    
     GLdouble *matrix = malloc(sizeof(GLdouble)*16);
 
     //Kamararen hasierako matrizea
     matrix[0] = 1; matrix[4] = 0;  matrix[8] = 0; matrix[12] = 0; 
     matrix[1] = 0; matrix[5] = 1;  matrix[9] = 0; matrix[13] = 0; 
-    matrix[2] = 0; matrix[6] = 0;  matrix[10] = 1; matrix[14] = -50; 
+    matrix[2] = 0; matrix[6] = 0;  matrix[10] = 1; matrix[14] = 50; 
     matrix[3] = 0; matrix[7] = 0;  matrix[11] = 0; matrix[15] = 1; 
     Stack_Push(objKam->stack, matrix);
 
@@ -96,6 +87,18 @@ void initialization (){
     znear = 10;
     zfar = 100;
 
+}
+
+/** GENERAL INITIALIZATION **/
+void initialization (){
+
+    /*Initialization of all the variables with the default values*/
+    _ortho_x_min = KG_ORTHO_X_MIN_INIT;
+    _ortho_x_max = KG_ORTHO_X_MAX_INIT;
+    _ortho_y_min = KG_ORTHO_Y_MIN_INIT;
+    _ortho_y_max = KG_ORTHO_Y_MAX_INIT;
+    _ortho_z_min = KG_ORTHO_Z_MIN_INIT;
+    _ortho_z_max = KG_ORTHO_Z_MAX_INIT;
 
     _window_ratio = (GLdouble) KG_WINDOW_WIDTH / (GLdouble) KG_WINDOW_HEIGHT;
 
@@ -105,8 +108,7 @@ void initialization (){
     /*Definition of the method to draw the objects*/
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    /* Perspektiba kamararentzat hasieraketak */
-
+    gureHasieraketak(); //Transformazioak eta kamara hasieratzeko
 
 }
 

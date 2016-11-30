@@ -7,8 +7,6 @@
 extern object3d * _first_object;
 extern object3d * _selected_object;
 
-extern PerspCam *objKam;
-
 
 GLdouble* biderkatu(GLdouble * transformazioa){
 	GLdouble * biderkatuta = malloc(sizeof(GLdouble)*16);
@@ -35,21 +33,6 @@ GLdouble* biderkatuLokalki(GLdouble * transformazioa){
 	for(i = 0;i<16;i+=4){
 		for(j=0;j<4;j++){
 			biderkatuta[k] = transformazioa[i] * stackTop[j] + transformazioa[i+1]*stackTop[j+4] + transformazioa[i+2]*stackTop[j+8]+transformazioa[i+3]*stackTop[j+12];
-			k++;
-		}
-	}
-	return biderkatuta;
-}
-
-GLdouble* biderkatuKamera(){
-	GLdouble * biderkatuta = malloc(sizeof(GLdouble)*16);
-	GLdouble * stackTop = Stack_Top(objKam-> stack);
-	printf("%.2f\n", stackTop[1]);
-	int i, j;
-	int k = 0;
-	for(i = 0;i<16;i+=4){
-		for(j=0;j<4;j++){
-			biderkatuta[k] = stackTop[i]*stackTop[j]+stackTop[i+1]*stackTop[j+4]+stackTop[i+2]*stackTop[j+8]+stackTop[i+3]*stackTop[j+12];
 			k++;
 		}
 	}
