@@ -85,13 +85,16 @@ void kamaraKokatu(){
             break;
 
         case 'b': ;
-           /* GLdouble * matrize = malloc(sizeof(GLdouble)*16);
             gluPerspective(fovy,aspect,znear,zfar);
-            matrize = biderkatuKamera();
-            gluLookAt(matrize[0],matrize[1],matrize[2],matrize[4],matrize[5],matrize[6],matrize[8],matrize[9],matrize[10]);
-            */break;
+            gluLookAt(objKam->posizioa[0],objKam->posizioa[1],objKam->posizioa[2],objKam->begira[0],objKam->begira[1],objKam->begira[2],
+      objKam->gora[0],objKam->gora[1],objKam->gora[2]);
+            break;
 
         case 'i':
+
+            gluPerspective(fovy,aspect,znear,zfar);
+            gluLookAt(objKam->posizioa[0],objKam->posizioa[1],objKam->posizioa[2],objKam->begira[0],objKam->begira[1],objKam->begira[2],
+      objKam->gora[0],objKam->gora[1],objKam->gora[2]);
 
             break;
 

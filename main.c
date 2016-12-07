@@ -24,6 +24,7 @@ GLdouble znear;
 GLdouble zfar;
 
 PerspCam *objKam;
+PerspCam *ibilKam;
 GLdouble *matrix;
 
 
@@ -52,13 +53,34 @@ char egoera;
     */
 
 
+char aldaketakObjKam;
+
+    /*
+        'o' = Aldaketak objetuari
+        'k' = Aldaketak kamarari
+        
+    */
+
+
 void gureHasieraketak(){
     /* Hasierako transformazio aldagaiak */
     kam_mota = 'o';
     egoera = 'm';
     aldaketak = 'g';
+    aldaketakObjKam = 'o';
 
-    /* Persp. kamararen balioak */
+
+
+    /* Kamara bektoreen hasieraketak */
+
+    GLdouble * eye = malloc(sizeof(GLdouble)*4);
+        eye[0]=0;   eye[1]=0;   eye[2]=-30; eye[3]=1;
+    GLdouble * center = malloc(sizeof(GLdouble)*4);
+        center[0]=0;    center[1]=0;    center[2]=30; center[3]=1;
+    GLdouble * up = malloc(sizeof(GLdouble)*4);
+        up[0]=0;    up[1]=1;    up[2]=0; up[3]=0;
+
+    /* Obj. kamararen balioak */
 
     objKam = malloc(sizeof(PerspCam));
     Stack *p = malloc(sizeof(Stack));
@@ -68,19 +90,36 @@ void gureHasieraketak(){
     objKam->begira = malloc(sizeof(GLdouble)*4);
     objKam->gora = malloc(sizeof(GLdouble)*4);
 
-    objKam->posizioa[0]=1; objKam->posizioa[1]=1; objKam->posizioa[2]=50; objKam->posizioa[3]=1;
-    objKam->begira[0]=1; objKam->begira[1]=1; objKam->begira[2]=50; objKam->begira[3]=1;
-    objKam->gora[0]=0; objKam->gora[1]=1; objKam->gora[2]=0; objKam->gora[3]=0;
+    objKam->posizioa = eye;
+    objKam->begira = center;
+    objKam->gora = up;
     
     GLdouble *matrix = malloc(sizeof(GLdouble)*16);
 
     //Kamararen hasierako matrizea
     matrix[0] = 1; matrix[4] = 0;  matrix[8] = 0; matrix[12] = 0; 
     matrix[1] = 0; matrix[5] = 1;  matrix[9] = 0; matrix[13] = 0; 
-    matrix[2] = 0; matrix[6] = 0;  matrix[10] = 1; matrix[14] = 50; 
+    matrix[2] = 0; matrix[6] = 0;  matrix[10] = 1; matrix[14] = -30; 
     matrix[3] = 0; matrix[7] = 0;  matrix[11] = 0; matrix[15] = 1; 
     Stack_Push(objKam->stack, matrix);
 
+    /* Kamara ibiltariaren hasieraketa */
+
+    ibilKam = malloc(sizeof(PerspCam));
+    Stack *p2 = malloc(sizeof(Stack));
+    Stack_Init(p2);
+    ibilKam->stack = p2;
+    ibilKam->posizioa = malloc(sizeof(GLdouble)*4);
+    ibilKam->begira = malloc(sizeof(GLdouble)*4);
+    ibilKam->gora = malloc(sizeof(GLdouble)*4);
+
+    ibilKam->posizioa = eye;
+    ibilKam->begira = center;
+    ibilKam->gora = up;
+
+    Stack_Push(ibilKam->stack, matrix);
+
+    /* extra */
 
     fovy = 20;
     aspect = _window_ratio;

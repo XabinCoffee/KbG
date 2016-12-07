@@ -7,6 +7,8 @@
 extern object3d * _first_object;
 extern object3d * _selected_object;
 
+extern PerspCam *objKam;
+
 
 GLdouble* biderkatu(GLdouble * transformazioa){
 	GLdouble * biderkatuta = malloc(sizeof(GLdouble)*16);
@@ -179,13 +181,44 @@ void eskalatu(int tekla, char ref_sys){
 	else if (ref_sys == 'l') Stack_Push(_selected_object-> stack,biderkatuLokalki(m));
 }
 
+void kamaraBiderkatu(){
+	GLdouble* matrizeaTop = malloc((sizeof(GLdouble))*16);
+	matrizeaTop = Stack_Top(objKam -> stack);
 
-/*void inprimatu(GLdouble* matrizea){
+	GLdouble* lagMatrix = malloc((sizeof(GLdouble))*16);
 
-	printf("-----   MATRIZEA   ----\n");
-	//printf("%f  %f  %f  %f  %f \n", matrizea[0], matrizea[4], matrizea[8], matrizea[12]);
-	//printf("%f  %f  %f  %f  %f \n", matrizea[1], matrizea[5], matrizea[9], matrizea[13]);
-	//printf("%f  %f  %f  %f  %f \n", matrizea[2], matrizea[6], matrizea[10], matrizea[14]);
-	//printf("%f  %f  %f  %f  %f \n", matrizea[3], matrizea[7], matrizea[11], matrizea[15]);
-	printf("-----------------------\n");
-}*/
+	int i;
+	for(i=0;i<16;i++)
+		lagMatrix[i] = 0;
+
+	/*lagMatrix[2] = 10;
+	lagMatrix[3] = 1;
+	lagMatrix[7] = 1;
+	lagMatrix[9] = 1;*/
+	lagMatrix[0] = 1;
+	lagMatrix[5] = 1;
+	lagMatrix[10] = 1;
+	lagMatrix[15] = 1;
+
+	GLdouble* erantzuna = malloc((sizeof(GLdouble))*16);
+
+	erantzuna[0] = lagMatrix[0]*matrizeaTop[0] + lagMatrix[1]*matrizeaTop[4] + lagMatrix[2]*matrizeaTop[8] + lagMatrix[3]*matrizeaTop[12];
+	erantzuna[1] = lagMatrix[0]*matrizeaTop[1] + lagMatrix[1]*matrizeaTop[5] + lagMatrix[2]*matrizeaTop[9] + lagMatrix[3]*matrizeaTop[13];
+	erantzuna[2] = lagMatrix[0]*matrizeaTop[2] + lagMatrix[1]*matrizeaTop[6] + lagMatrix[2]*matrizeaTop[10] + lagMatrix[3]*matrizeaTop[14];
+	erantzuna[3] = lagMatrix[0]*matrizeaTop[3] + lagMatrix[1]*matrizeaTop[7] + lagMatrix[2]*matrizeaTop[11] + lagMatrix[3]*matrizeaTop[15];
+	erantzuna[4] = lagMatrix[4]*matrizeaTop[0] + lagMatrix[5]*matrizeaTop[4] + lagMatrix[6]*matrizeaTop[8] + lagMatrix[7]*matrizeaTop[12];
+	erantzuna[5] = lagMatrix[4]*matrizeaTop[1] + lagMatrix[5]*matrizeaTop[5] + lagMatrix[6]*matrizeaTop[9] + lagMatrix[7]*matrizeaTop[13];
+	erantzuna[6] = lagMatrix[4]*matrizeaTop[2] + lagMatrix[5]*matrizeaTop[6] + lagMatrix[6]*matrizeaTop[10] + lagMatrix[7]*matrizeaTop[14];
+	erantzuna[7] = lagMatrix[4]*matrizeaTop[3] + lagMatrix[5]*matrizeaTop[7] + lagMatrix[6]*matrizeaTop[11] + lagMatrix[7]*matrizeaTop[15];
+	erantzuna[8] = lagMatrix[8]*matrizeaTop[0] + lagMatrix[9]*matrizeaTop[4] + lagMatrix[10]*matrizeaTop[8] + lagMatrix[11]*matrizeaTop[12];
+	erantzuna[9] = lagMatrix[8]*matrizeaTop[1] + lagMatrix[9]*matrizeaTop[5] + lagMatrix[10]*matrizeaTop[9] + lagMatrix[11]*matrizeaTop[13];
+	erantzuna[10] = lagMatrix[8]*matrizeaTop[2] + lagMatrix[9]*matrizeaTop[6] + lagMatrix[10]*matrizeaTop[10] + lagMatrix[11]*matrizeaTop[14];
+	erantzuna[11] = lagMatrix[8]*matrizeaTop[3] + lagMatrix[9]*matrizeaTop[7] + lagMatrix[10]*matrizeaTop[11] + lagMatrix[11]*matrizeaTop[15];
+	erantzuna[12] = lagMatrix[12]*matrizeaTop[0] + lagMatrix[13]*matrizeaTop[4] + lagMatrix[14]*matrizeaTop[8] + lagMatrix[15]*matrizeaTop[12];
+	erantzuna[13] = lagMatrix[12]*matrizeaTop[1] + lagMatrix[13]*matrizeaTop[5] + lagMatrix[14]*matrizeaTop[9] + lagMatrix[15]*matrizeaTop[13];
+	erantzuna[14] = lagMatrix[12]*matrizeaTop[2] + lagMatrix[13]*matrizeaTop[6] + lagMatrix[14]*matrizeaTop[10] + lagMatrix[15]*matrizeaTop[14];
+	erantzuna[15] = lagMatrix[12]*matrizeaTop[3] + lagMatrix[13]*matrizeaTop[7] + lagMatrix[14]*matrizeaTop[11] + lagMatrix[15]*matrizeaTop[15];
+
+
+	Stack_Push(objKam -> stack, erantzuna);
+}
