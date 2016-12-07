@@ -22,6 +22,7 @@ extern char egoera;
 extern char aldaketakObjKam;
 
 
+int zenbat = 0;
 /**
  * @brief This function just prints information about the use
  * of the keys
@@ -511,28 +512,68 @@ void handleSpecialKeypress(int key, int x, int y) {
 
 		if (kam_mota == 'b'){
 
+
+			if (egoera == 'm'){
+
+				switch(key){
+
+					case GLUT_KEY_LEFT:
+						translazioaKam(GLUT_KEY_RIGHT, aldaketak);
+						break;
+
+					case GLUT_KEY_RIGHT:
+						translazioaKam(GLUT_KEY_LEFT, aldaketak);
+						break;
+
+					case GLUT_KEY_UP:
+						translazioaKam(key, aldaketak);
+						break;
+
+					case GLUT_KEY_DOWN:
+						translazioaKam(key, aldaketak);
+						break;
+
+					case GLUT_KEY_PAGE_UP:
+						translazioaKam(key, aldaketak);
+						break;
+
+					case GLUT_KEY_PAGE_DOWN:
+						translazioaKam(key, aldaketak);
+						break;
+
+					default: 
+						break;
+
+				}
+
+			}
+
 			if (egoera == 'b'){
 
 				switch(key){
 
 					case GLUT_KEY_LEFT:
-						printf("He go to ezker \n");
+						biraketaKam(key, aldaketak);
 						break;
 
 					case GLUT_KEY_RIGHT:
-						printf("He go to eskub \n");
+						biraketaKam(key, aldaketak);
 						break;
 
 					case GLUT_KEY_UP:
+						biraketaKam(key, aldaketak);
 						break;
 
 					case GLUT_KEY_DOWN:
+						biraketaKam(key, aldaketak);
 						break;
 
 					case GLUT_KEY_PAGE_UP:
+						biraketaKam(key, aldaketak);
 						break;
 
 					case GLUT_KEY_PAGE_DOWN:
+						biraketaKam(key, aldaketak);
 						break;
 
 					default: 
@@ -544,7 +585,60 @@ void handleSpecialKeypress(int key, int x, int y) {
 
 		}
 
+		eguneratu_objKam();
+
 	}
+
+		if (kam_mota == 'i'){
+
+
+			if (egoera == 'm'){
+
+				switch(key){
+
+					case GLUT_KEY_LEFT:
+						translazioaKam(GLUT_KEY_RIGHT, aldaketak);
+						break;
+
+					case GLUT_KEY_RIGHT:
+						translazioaKam(GLUT_KEY_LEFT, aldaketak);
+						break;
+
+					case GLUT_KEY_UP:
+						translazioaKam(GLUT_KEY_PAGE_UP, aldaketak);
+						break;
+
+					case GLUT_KEY_DOWN:
+						translazioaKam(GLUT_KEY_PAGE_DOWN, aldaketak);
+						break;
+
+					case GLUT_KEY_PAGE_UP:
+
+						if (zenbat <= 2){
+							biraketaKam(GLUT_KEY_UP, 'l');
+							zenbat++;
+						}
+						break;
+
+					case GLUT_KEY_PAGE_DOWN:
+						if (zenbat >= -2){
+							biraketaKam(GLUT_KEY_DOWN, 'l');
+							zenbat--;
+						}
+						break;
+
+					default: 
+						break;
+
+				}
+
+			}
+
+		eguneratu_ibilKam();
+
+	}
+
+
 	/*Zerbait berria marraztu behar badu marrazteko*/
 	glutPostRedisplay();
 }

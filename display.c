@@ -24,6 +24,7 @@ extern GLdouble aspect;
 extern kam_mota;
 
 extern PerspCam *objKam;
+extern PerspCam *ibilKam;
 
 /**
  * @brief Function to draw the axes
@@ -86,15 +87,17 @@ void kamaraKokatu(){
 
         case 'b': ;
             gluPerspective(fovy,aspect,znear,zfar);
-            gluLookAt(objKam->posizioa[0],objKam->posizioa[1],objKam->posizioa[2],objKam->begira[0],objKam->begira[1],objKam->begira[2],
-      objKam->gora[0],objKam->gora[1],objKam->gora[2]);
+            gluLookAt(objKam->posizioa[0],objKam->posizioa[1],objKam->posizioa[2],
+                objKam->begira[0],objKam->begira[1],objKam->begira[2],
+                objKam->gora[0],objKam->gora[1],objKam->gora[2]);
             break;
 
         case 'i':
 
             gluPerspective(fovy,aspect,znear,zfar);
-            gluLookAt(objKam->posizioa[0],objKam->posizioa[1],objKam->posizioa[2],objKam->begira[0],objKam->begira[1],objKam->begira[2],
-      objKam->gora[0],objKam->gora[1],objKam->gora[2]);
+            gluLookAt(ibilKam->posizioa[0],ibilKam->posizioa[1],ibilKam->posizioa[2],
+                ibilKam->begira[0],ibilKam->begira[1],ibilKam->begira[2],
+                ibilKam->gora[0],ibilKam->gora[1],ibilKam->gora[2]);
 
             break;
 
