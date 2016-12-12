@@ -21,6 +21,8 @@ extern char aldaketak;
 extern char egoera;
 extern char aldaketakObjKam;
 
+extern PerspCam *objKam;
+extern PerspCam *ibilKam;
 
 int zenbat = 0;
 /**
@@ -201,14 +203,39 @@ void keyboard(unsigned char key, int x, int y) {
 
 		case 26: /*CTRL + z*/
 			//Aldaketak desegiteko CTRL + Z erabiliz
-			if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
-				if(_selected_object != NULL){
-					if (_selected_object->stack->size > 1){
-						Stack_Push(_selected_object->desegin,Stack_Top(_selected_object->stack));
-						Stack_Pop(_selected_object->stack);
+
+			if (aldaketakObjKam == 'o'){
+				if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+					if(_selected_object != NULL){
+						if (_selected_object->stack->size > 1){
+							Stack_Push(_selected_object->desegin,Stack_Top(_selected_object->stack));
+							Stack_Pop(_selected_object->stack);
+						}
 					}
 				}
 			}
+			else if (aldaketakObjKam == 'k'){
+				if (kam_mota == 'b'){
+					if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+						if(objKam != NULL){
+							if (objKam->stack->size > 1){
+								Stack_Pop(objKam->stack);
+							}
+						}
+					}
+					eguneratu_objKam();
+				} else if (kam_mota == 'i'){
+					if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+						if(ibilKam != NULL){
+							if (ibilKam->stack->size > 1){
+								Stack_Pop(ibilKam->stack);
+							}
+						}
+					}
+					eguneratu_ibilKam();
+				}
+			}
+
 			break;
 
 
@@ -302,15 +329,15 @@ void keyboard(unsigned char key, int x, int y) {
 
 			break;
 
-		case 111:
-		case 79:
+		case 111: /* <o> */
+		case 79: /* <O> */
 
 			aldaketakObjKam = 'o';
 			printf("Aldaketak objetuari aplikatuko zaizkio \n");
 			break;
 
-		case 107:
-		case 75:
+		case 107: /* <k> */
+		case 75: /* <K> */
 
 			aldaketakObjKam = 'k';
 			printf("Aldaketak kamarari aplikatuko zaizkio \n");

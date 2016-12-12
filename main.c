@@ -74,9 +74,9 @@ void gureHasieraketak(){
     /* Kamara bektoreen hasieraketak */
 
     GLdouble * eye = malloc(sizeof(GLdouble)*4);
-        eye[0]=0;   eye[1]=0;   eye[2]=-30; eye[3]=1;
+        eye[0]=0;   eye[1]=0;   eye[2]=30; eye[3]=1;
     GLdouble * center = malloc(sizeof(GLdouble)*4);
-        center[0]=0;    center[1]=0;    center[2]=30; center[3]=1;
+        center[0]=0;    center[1]=0;    center[2]=-30; center[3]=1;
     GLdouble * up = malloc(sizeof(GLdouble)*4);
         up[0]=0;    up[1]=1;    up[2]=0; up[3]=0;
 
