@@ -618,9 +618,6 @@ void handleSpecialKeypress(int key, int x, int y) {
 
 		if (kam_mota == 'i'){
 
-
-			if (egoera == 'm'){
-
 				switch(key){
 
 					case GLUT_KEY_LEFT:
@@ -656,8 +653,6 @@ void handleSpecialKeypress(int key, int x, int y) {
 
 					default: 
 						break;
-
-				}
 
 			}
 

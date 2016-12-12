@@ -9,6 +9,7 @@ extern object3d * _selected_object;
 
 extern PerspCam *objKam;
 extern PerspCam *ibilKam;
+extern char kam_mota;
 
 
 
@@ -17,41 +18,41 @@ GLdouble* biderkatuObjKamBektorea(GLdouble *bektorea){
 
     GLdouble *lag = Stack_Top(objKam->stack);
     GLdouble batura=0;
-    GLdouble *bektoreBerria =malloc (sizeof(GLdouble)*4);
+    GLdouble *bek = malloc (sizeof(GLdouble)*4);
     int i,j;
     for(i=0;i<4;i++){
         for(j=0;j<4;j++){
             batura=batura + lag[i+j*4]*bektorea[j];
         }
-        bektoreBerria[i]=batura;
+        bek[i]=batura;
         batura=0;
     }
-    return bektoreBerria;
+    return bek;
 }
 
 GLdouble* biderkatuIbilKamBektorea(GLdouble *bektorea){
 
-    GLdouble *lag = Stack_Top(objKam->stack);
+    GLdouble *lag = Stack_Top(ibilKam->stack);
     GLdouble batura=0;
-    GLdouble *bektoreBerria =malloc (sizeof(GLdouble)*4);
+    GLdouble *bek = malloc(sizeof(GLdouble)*4);
     int i,j;
     for(i=0;i<4;i++){
         for(j=0;j<4;j++){
             batura=batura + lag[i+j*4]*bektorea[j];
         }
-        bektoreBerria[i]=batura;
+        bek[i]=batura;
         batura=0;
     }
-    return bektoreBerria;
+    return bek;
 }
 
 void eguneratu_objKam(){
 
-    GLdouble *eyeLag = malloc (sizeof(GLdouble)*4);
+    GLdouble *eyeLag = malloc(sizeof(GLdouble)*4);
     eyeLag[0]=0;   eyeLag[1]=0;   eyeLag[2]=0; eyeLag[3]=1;
-    GLdouble *centerLag = malloc (sizeof(GLdouble)*4);
+    GLdouble *centerLag = malloc(sizeof(GLdouble)*4);
     centerLag[0]=0;    centerLag[1]=0;    centerLag[2]=30; centerLag[3]=1;
-    GLdouble *upLag = malloc (sizeof(GLdouble)*4);
+    GLdouble *upLag = malloc(sizeof(GLdouble)*4);
     upLag[0]=0;    upLag[1]=1;    upLag[2]=0; upLag[3]=0;
 
     objKam->posizioa=biderkatuObjKamBektorea(eyeLag);
@@ -62,11 +63,11 @@ void eguneratu_objKam(){
 
 void eguneratu_ibilKam(){
 
-    GLdouble *eyeLag = malloc (sizeof(GLdouble)*4);
+    GLdouble *eyeLag = malloc(sizeof(GLdouble)*4);
     eyeLag[0]=0;   eyeLag[1]=0;   eyeLag[2]=0; eyeLag[3]=1;
-    GLdouble *centerLag = malloc (sizeof(GLdouble)*4);
+    GLdouble *centerLag = malloc(sizeof(GLdouble)*4);
     centerLag[0]=0;    centerLag[1]=0;    centerLag[2]=30; centerLag[3]=1;
-    GLdouble *upLag = malloc (sizeof(GLdouble)*4);
+    GLdouble *upLag = malloc(sizeof(GLdouble)*4);
     upLag[0]=0;    upLag[1]=1;    upLag[2]=0; upLag[3]=0;
 
     ibilKam->posizioa=biderkatuIbilKamBektorea(eyeLag);
@@ -93,7 +94,9 @@ GLdouble* biderkatu(GLdouble * transformazioa){
 
 GLdouble* biderkatuKam(GLdouble * transformazioa){
 	GLdouble * biderkatuta = malloc(sizeof(GLdouble)*16);
-	GLdouble * stackTop = Stack_Top(objKam-> stack);
+	GLdouble * stackTop;
+	if (kam_mota == 'b') stackTop = Stack_Top(objKam-> stack);
+	else stackTop = Stack_Top(ibilKam-> stack);
 	int i, j;
 	int k = 0;
 
@@ -124,7 +127,9 @@ GLdouble* biderkatuLokalki(GLdouble * transformazioa){
 
 GLdouble* biderkatuKamLokalki(GLdouble * transformazioa){
 	GLdouble * biderkatuta = malloc(sizeof(GLdouble)*16);
-	GLdouble * stackTop = Stack_Top(objKam-> stack);
+	GLdouble * stackTop;
+	if (kam_mota == 'b') stackTop = Stack_Top(objKam-> stack);
+	else stackTop = Stack_Top(ibilKam-> stack);
 	int i, j;
 	int k = 0;
 
@@ -214,9 +219,12 @@ void translazioaKam(int tekla, char ref_sys){
 			m[14] = -1;
 			break;
 	}
-
-	if (ref_sys == 'g') Stack_Push(objKam-> stack,biderkatuKam(m)); //Erreferentzi sistema globalean egin eragiketa eta ondoren pilaratu
-	else if (ref_sys == 'l') Stack_Push(objKam-> stack,biderkatuKamLokalki(m)); //Erreferentzi sistema lokalean egin eragiketa eta pilaratu
+	if (kam_mota == 'b'){
+		if (ref_sys == 'g') Stack_Push(objKam-> stack,biderkatuKam(m)); //Erreferentzi sistema globalean egin eragiketa eta ondoren pilaratu
+		else if (ref_sys == 'l') Stack_Push(objKam-> stack,biderkatuKamLokalki(m)); //Erreferentzi sistema lokalean egin eragiketa eta pilaratu
+	} else {
+		Stack_Push(ibilKam-> stack,biderkatuKam(m));
+	}
 }
 
 void biraketa(int tekla, char ref_sys){
@@ -294,45 +302,49 @@ void biraketaKam(int tekla, char ref_sys){
 	//Teklaren arabera aldatu matrizea
 	switch(tekla){
 		case GLUT_KEY_UP: //tekla gora
-			m[5] = cos(M_PI/8);
-			m[6] = sin(M_PI/8);
-			m[9] = -sin(M_PI/8);
-			m[10] = cos(M_PI/8);
+			m[5] = cos(M_PI/32);
+			m[6] = sin(M_PI/32);
+			m[9] = -sin(M_PI/32);
+			m[10] = cos(M_PI/32);
 			break;
 		case GLUT_KEY_DOWN: //tekla behera
-			m[5] = cos(-M_PI/8);
-			m[6] = sin(-M_PI/8);
-			m[9] = sin(M_PI/8);
-			m[10] = cos(-M_PI/8);
+			m[5] = cos(-M_PI/32);
+			m[6] = sin(-M_PI/32);
+			m[9] = sin(M_PI/32);
+			m[10] = cos(-M_PI/32);
 			break;
 		case GLUT_KEY_LEFT: //tekla ezkerrera
-			m[0] = cos(-M_PI/8);
-			m[2] = sin(M_PI/8);
-			m[8] = sin(-M_PI/8);
-			m[10] = cos(-M_PI/8);
+			m[0] = cos(-M_PI/32);
+			m[2] = sin(M_PI/32);
+			m[8] = sin(-M_PI/32);
+			m[10] = cos(-M_PI/32);
 			break;
 		case GLUT_KEY_RIGHT: //tekla eskubira
-			m[0] = cos(M_PI/8);
-			m[2] = -sin(M_PI/8);
-			m[8] = sin(M_PI/8);
-			m[10] = cos(M_PI/8);
+			m[0] = cos(M_PI/32);
+			m[2] = -sin(M_PI/32);
+			m[8] = sin(M_PI/32);
+			m[10] = cos(M_PI/32);
 			break;
 		case GLUT_KEY_PAGE_UP:
-			m[0] = cos(M_PI/8);
-			m[1] = sin(M_PI/8);
-			m[4] = -sin(M_PI/8);
-			m[5] = cos(M_PI/8);
+			m[0] = cos(M_PI/32);
+			m[1] = sin(M_PI/32);
+			m[4] = -sin(M_PI/32);
+			m[5] = cos(M_PI/32);
 			break;
 		case GLUT_KEY_PAGE_DOWN:
-			m[0] = cos(-M_PI/8);
-			m[1] = sin(-M_PI/8);
-			m[4] = sin(M_PI/8);
-			m[5] = cos(-M_PI/8);
+			m[0] = cos(-M_PI/32);
+			m[1] = sin(-M_PI/32);
+			m[4] = sin(M_PI/32);
+			m[5] = cos(-M_PI/32);
 			break;
 	}
 
-	if (ref_sys == 'g') Stack_Push(objKam-> stack,biderkatuKam(m)); 
-	else if (ref_sys == 'l') Stack_Push(objKam-> stack,biderkatuKamLokalki(m));
+	if (kam_mota == 'b'){
+		if (ref_sys == 'g') Stack_Push(objKam-> stack,biderkatuKam(m)); //Erreferentzi sistema globalean egin eragiketa eta ondoren pilaratu
+		else if (ref_sys == 'l') Stack_Push(objKam-> stack,biderkatuKamLokalki(m)); //Erreferentzi sistema lokalean egin eragiketa eta pilaratu
+	} else {
+		Stack_Push(ibilKam-> stack,biderkatuKamLokalki(m));
+	}
 }
 
 
