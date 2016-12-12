@@ -74,12 +74,11 @@ void gureHasieraketak(){
     /* Kamara bektoreen hasieraketak */
 
     GLdouble * eye = malloc(sizeof(GLdouble)*4);
-        eye[0]=0;   eye[1]=0;   eye[2]=30; eye[3]=1;
+        eye[0]=0;   eye[1]=0;   eye[2]=-30; eye[3]=1;
     GLdouble * center = malloc(sizeof(GLdouble)*4);
         center[0]=0;    center[1]=0;    center[2]=-30; center[3]=1;
     GLdouble * up = malloc(sizeof(GLdouble)*4);
         up[0]=0;    up[1]=1;    up[2]=0; up[3]=0;
-
     /* Obj. kamararen balioak */
 
     objKam = malloc(sizeof(PerspCam));
@@ -99,7 +98,7 @@ void gureHasieraketak(){
     //Kamararen hasierako matrizea
     matrix[0] = 1; matrix[4] = 0;  matrix[8] = 0; matrix[12] = 0; 
     matrix[1] = 0; matrix[5] = 1;  matrix[9] = 0; matrix[13] = 0; 
-    matrix[2] = 0; matrix[6] = 0;  matrix[10] = 1; matrix[14] = -30; 
+    matrix[2] = 0; matrix[6] = 0;  matrix[10] = 1; matrix[14] = 40; 
     matrix[3] = 0; matrix[7] = 0;  matrix[11] = 0; matrix[15] = 1; 
     Stack_Push(objKam->stack, matrix);
 
@@ -125,6 +124,9 @@ void gureHasieraketak(){
     aspect = _window_ratio;
     znear = 10;
     zfar = 100;
+    
+    eguneratu_objKam();
+    eguneratu_ibilKam();
 
 }
 

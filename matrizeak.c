@@ -51,7 +51,7 @@ void eguneratu_objKam(){
     GLdouble *eyeLag = malloc(sizeof(GLdouble)*4);
     eyeLag[0]=0;   eyeLag[1]=0;   eyeLag[2]=0; eyeLag[3]=1;
     GLdouble *centerLag = malloc(sizeof(GLdouble)*4);
-    centerLag[0]=0;    centerLag[1]=0;    centerLag[2]=30; centerLag[3]=1;
+    centerLag[0]=0;    centerLag[1]=0;    centerLag[2]=-30; centerLag[3]=1;
     GLdouble *upLag = malloc(sizeof(GLdouble)*4);
     upLag[0]=0;    upLag[1]=1;    upLag[2]=0; upLag[3]=0;
 
@@ -66,7 +66,7 @@ void eguneratu_ibilKam(){
     GLdouble *eyeLag = malloc(sizeof(GLdouble)*4);
     eyeLag[0]=0;   eyeLag[1]=0;   eyeLag[2]=0; eyeLag[3]=1;
     GLdouble *centerLag = malloc(sizeof(GLdouble)*4);
-    centerLag[0]=0;    centerLag[1]=0;    centerLag[2]=30; centerLag[3]=1;
+    centerLag[0]=0;    centerLag[1]=0;    centerLag[2]=-30; centerLag[3]=1;
     GLdouble *upLag = malloc(sizeof(GLdouble)*4);
     upLag[0]=0;    upLag[1]=1;    upLag[2]=0; upLag[3]=0;
 

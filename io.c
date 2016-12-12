@@ -545,11 +545,11 @@ void handleSpecialKeypress(int key, int x, int y) {
 				switch(key){
 
 					case GLUT_KEY_LEFT:
-						translazioaKam(GLUT_KEY_RIGHT, aldaketak);
+						translazioaKam(key, aldaketak);
 						break;
 
 					case GLUT_KEY_RIGHT:
-						translazioaKam(GLUT_KEY_LEFT, aldaketak);
+						translazioaKam(key, aldaketak);
 						break;
 
 					case GLUT_KEY_UP:
