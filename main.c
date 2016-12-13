@@ -170,10 +170,11 @@ int main(int argc, char** argv) {
 
     /* glut initializations */
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_RGB);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(KG_WINDOW_WIDTH, KG_WINDOW_HEIGHT);
     glutInitWindowPosition(KG_WINDOW_X, KG_WINDOW_Y);
     glutCreateWindow(KG_WINDOW_TITLE);
+
 
     /* set the callback functions */
     glutDisplayFunc(display);
@@ -183,6 +184,8 @@ int main(int argc, char** argv) {
 
     /* this initialization has to be AFTER the creation of the window */
     initialization();
+    glEnable(GL_DEPTH_TEST);
+
 
     /* start the main loop */
     glutMainLoop();

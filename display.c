@@ -112,7 +112,7 @@ void display(void) {
     object3d *aux_obj = _first_object;
 
     /* Clear the screen */
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
     /* Define the projection */
     glMatrixMode(GL_PROJECTION);
@@ -146,6 +146,8 @@ void display(void) {
             glBegin(GL_POLYGON);
             for (v = 0; v < aux_obj->face_table[f].num_vertices; v++) {
                 v_index = aux_obj->face_table[f].vertex_table[v];
+                glNormal3d(aux_obj->normala[f].x,aux_obj->normala[f].y,aux_obj->normala[f].z);
+
                 glVertex3d(aux_obj->vertex_table[v_index].coord.x,
                         aux_obj->vertex_table[v_index].coord.y,
                         aux_obj->vertex_table[v_index].coord.z);

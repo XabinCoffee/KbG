@@ -11,6 +11,7 @@
 #include <string.h>
 #include <malloc.h>
 #include "definitions.h"
+#include <math.h>
 
 #define MAXLINE 200
 
@@ -194,6 +195,42 @@ printf("2 pasada\n");
             object_ptr->max.z = object_ptr->vertex_table[i].coord.z;
 
     }
+
+    object_ptr->normala= malloc(sizeof(point3) * object_ptr->num_faces);
+    face lag;
+    int w = 0;
+
+
+    for (i=0; i<object_ptr->num_faces-1;i++){
+        lag = object_ptr->face_table[i];
+        point3 puntuak[lag.num_vertices];
+        for(w=0;w<lag.num_vertices;w++){
+            puntuak[w] = object_ptr->vertex_table[lag.vertex_table[w]].coord;
+        }
+
+        point3 bektoreak[lag.num_vertices-1];
+        point3 lag2;
+
+        for(w=0;w<lag.num_vertices-1;w++){
+            lag2.x=puntuak[w+1].x - puntuak[0].x;
+            lag2.y=puntuak[w+1].y - puntuak[0].y;
+            lag2.z=puntuak[w+1].z - puntuak[0].z;
+            bektoreak[w]=lag2;
+        }
+
+        for(w=0;w<lag.num_vertices-1;w++){
+            object_ptr->normala[i].x=bektoreak[0].y*bektoreak[1].z-bektoreak[0].z*bektoreak[1].y;
+            object_ptr->normala[i].y=bektoreak[0].z*bektoreak[1].x-bektoreak[0].x*bektoreak[1].z;
+            object_ptr->normala[i].z=bektoreak[0].x*bektoreak[1].y-bektoreak[0].y*bektoreak[1].x;
+            GLdouble normalizatu=sqrt(pow(object_ptr->normala[i].x,2)+pow(object_ptr->normala[i].y,2)+pow(object_ptr->normala[i].z,2));            
+            object_ptr->normala[i].x = object_ptr->normala[i].x / normalizatu;
+            object_ptr->normala[i].y = object_ptr->normala[i].y / normalizatu;
+            object_ptr->normala[i].z = object_ptr->normala[i].z / normalizatu;
+        }
+
+    }
+
+
     return (0);
 }
 

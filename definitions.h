@@ -119,6 +119,7 @@ struct object3d{
     struct Stack *stack;                /* Objetu bakoitzaren pila, bertan transformazio matrizeak gordetzen joateko */
     struct Stack *desegin;              /* Ctrl+Z egiterakoan, desegindako aldaketak hemen gordeko dira, geroago berreskuratu nahi badira*/
     struct object3d *next;              /* next element in the pile of objects */
+    point3 *normala;                    /* Objektuaren normalak */
 };
 
 typedef struct object3d object3d;
