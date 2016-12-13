@@ -84,7 +84,11 @@ void gureHasieraketak(){
     objKam = malloc(sizeof(PerspCam));
     Stack *p = malloc(sizeof(Stack));
     Stack_Init(p);
+    Stack *d = malloc(sizeof(Stack));
+    Stack_Init(d);
+
     objKam->stack = p;
+    objKam->desegin = d;
     objKam->posizioa = malloc(sizeof(GLdouble)*4);
     objKam->begira = malloc(sizeof(GLdouble)*4);
     objKam->gora = malloc(sizeof(GLdouble)*4);
@@ -107,7 +111,11 @@ void gureHasieraketak(){
     ibilKam = malloc(sizeof(PerspCam));
     Stack *p2 = malloc(sizeof(Stack));
     Stack_Init(p2);
+    Stack *d2 = malloc(sizeof(Stack));
+    Stack_Init(d2);
+
     ibilKam->stack = p2;
+    ibilKam->desegin = d2;
     ibilKam->posizioa = malloc(sizeof(GLdouble)*4);
     ibilKam->begira = malloc(sizeof(GLdouble)*4);
     ibilKam->gora = malloc(sizeof(GLdouble)*4);

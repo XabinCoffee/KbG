@@ -126,7 +126,8 @@ typedef struct object3d object3d;
 struct PerspCam{
     GLdouble* posizioa;         /* Kamara zein puntutan dagoen */
     GLdouble* begira;           /* Nora begira dagoen */
-    GLdouble* gora;             /* Kamararen gora bektorea */            
+    GLdouble* gora;             /* Kamararen gora bektorea */
+    struct Stack *desegin;      /* Ctrl+Z egiterakoan, desegindako aldaketak hemen gordeko dira, geroago berreskuratu nahi badira*/            
     struct Stack *stack;    /* Aldaketa pila */
 };
 

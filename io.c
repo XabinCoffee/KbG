@@ -219,6 +219,7 @@ void keyboard(unsigned char key, int x, int y) {
 					if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
 						if(objKam != NULL){
 							if (objKam->stack->size > 1){
+								Stack_Push(objKam->desegin,Stack_Top(objKam->stack));
 								Stack_Pop(objKam->stack);
 							}
 						}
@@ -228,6 +229,7 @@ void keyboard(unsigned char key, int x, int y) {
 					if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
 						if(ibilKam != NULL){
 							if (ibilKam->stack->size > 1){
+								Stack_Push(ibilKam->desegin,Stack_Top(ibilKam->stack));
 								Stack_Pop(ibilKam->stack);
 							}
 						}
@@ -241,14 +243,43 @@ void keyboard(unsigned char key, int x, int y) {
 
 		case 25: /*CTRL + y*/
 			//Desegindako aldaketak berreskuratzeko
-			if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
-				if(_selected_object != NULL){
-					if (_selected_object->desegin->size > 1){
-						GLdouble *m = malloc(sizeof(GLdouble));
-						m = Stack_Top(_selected_object->desegin);
-						Stack_Pop(_selected_object->desegin);
-						Stack_Push(_selected_object->stack,m);
+
+			if (aldaketakObjKam == 'o'){
+				if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+					if(_selected_object != NULL){
+						if (_selected_object->desegin->size > 1){
+							GLdouble *m = malloc(sizeof(GLdouble));
+							m = Stack_Top(_selected_object->desegin);
+							Stack_Pop(_selected_object->desegin);
+							Stack_Push(_selected_object->stack,m);
+						}
 					}
+				}
+			}else if (aldaketakObjKam == 'k'){	
+				if (kam_mota == 'b'){
+					if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+						if(objKam != NULL){
+							if (objKam->desegin->size > 1){
+								GLdouble *m = malloc(sizeof(GLdouble));
+								m = Stack_Top(objKam->desegin);
+								Stack_Pop(objKam->desegin);
+								Stack_Push(objKam->stack,m);
+							}
+						}
+					}
+					eguneratu_objKam();
+				} else if (kam_mota == 'i'){
+					if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+						if(ibilKam != NULL){
+							if (ibilKam->desegin->size > 1){
+								GLdouble *m = malloc(sizeof(GLdouble));
+								m = Stack_Top(ibilKam->desegin);
+								Stack_Pop(ibilKam->desegin);
+								Stack_Push(ibilKam->stack,m);
+							}
+						}
+					}
+					eguneratu_ibilKam();
 				}
 			}
 			break;
@@ -546,26 +577,32 @@ void handleSpecialKeypress(int key, int x, int y) {
 
 					case GLUT_KEY_LEFT:
 						translazioaKam(key, aldaketak);
+						Stack_Init(objKam->desegin);
 						break;
 
 					case GLUT_KEY_RIGHT:
 						translazioaKam(key, aldaketak);
+						Stack_Init(objKam->desegin);
 						break;
 
 					case GLUT_KEY_UP:
 						translazioaKam(key, aldaketak);
+						Stack_Init(objKam->desegin);
 						break;
 
 					case GLUT_KEY_DOWN:
 						translazioaKam(key, aldaketak);
+						Stack_Init(objKam->desegin);
 						break;
 
 					case GLUT_KEY_PAGE_UP:
 						translazioaKam(key, aldaketak);
+						Stack_Init(objKam->desegin);
 						break;
 
 					case GLUT_KEY_PAGE_DOWN:
 						translazioaKam(key, aldaketak);
+						Stack_Init(objKam->desegin);
 						break;
 
 					default: 
@@ -581,26 +618,32 @@ void handleSpecialKeypress(int key, int x, int y) {
 
 					case GLUT_KEY_LEFT:
 						biraketaKam(key, aldaketak);
+						Stack_Init(objKam->desegin);
 						break;
 
 					case GLUT_KEY_RIGHT:
 						biraketaKam(key, aldaketak);
+						Stack_Init(objKam->desegin);
 						break;
 
 					case GLUT_KEY_UP:
 						biraketaKam(key, aldaketak);
+						Stack_Init(objKam->desegin);
 						break;
 
 					case GLUT_KEY_DOWN:
 						biraketaKam(key, aldaketak);
+						Stack_Init(objKam->desegin);
 						break;
 
 					case GLUT_KEY_PAGE_UP:
 						biraketaKam(key, aldaketak);
+						Stack_Init(objKam->desegin);
 						break;
 
 					case GLUT_KEY_PAGE_DOWN:
 						biraketaKam(key, aldaketak);
+						Stack_Init(objKam->desegin);
 						break;
 
 					default: 
@@ -610,36 +653,37 @@ void handleSpecialKeypress(int key, int x, int y) {
 
 			}
 
-		}
+			eguneratu_objKam();
 
-		eguneratu_objKam();
-
-	}
-
-		if (kam_mota == 'i'){
+		} else if (kam_mota == 'i'){
 
 				switch(key){
 
 					case GLUT_KEY_LEFT:
-						translazioaKam(GLUT_KEY_RIGHT, aldaketak);
+						translazioaKam(key, aldaketak);
+						Stack_Init(ibilKam->desegin);
 						break;
 
 					case GLUT_KEY_RIGHT:
-						translazioaKam(GLUT_KEY_LEFT, aldaketak);
+						translazioaKam(key, aldaketak);
+						Stack_Init(ibilKam->desegin);
 						break;
 
 					case GLUT_KEY_UP:
-						translazioaKam(GLUT_KEY_PAGE_UP, aldaketak);
+						translazioaKam(GLUT_KEY_PAGE_DOWN, aldaketak);
+						Stack_Init(ibilKam->desegin);
 						break;
 
 					case GLUT_KEY_DOWN:
-						translazioaKam(GLUT_KEY_PAGE_DOWN, aldaketak);
+						translazioaKam(GLUT_KEY_PAGE_UP, aldaketak);
+						Stack_Init(ibilKam->desegin);
 						break;
 
 					case GLUT_KEY_PAGE_UP:
 
 						if (zenbat <= 2){
 							biraketaKam(GLUT_KEY_UP, 'l');
+							Stack_Init(ibilKam->desegin);
 							zenbat++;
 						}
 						break;
@@ -647,6 +691,7 @@ void handleSpecialKeypress(int key, int x, int y) {
 					case GLUT_KEY_PAGE_DOWN:
 						if (zenbat >= -2){
 							biraketaKam(GLUT_KEY_DOWN, 'l');
+							Stack_Init(ibilKam->desegin);
 							zenbat--;
 						}
 						break;
@@ -657,6 +702,11 @@ void handleSpecialKeypress(int key, int x, int y) {
 			}
 
 		eguneratu_ibilKam();
+
+
+		}
+
+
 
 	}
 
