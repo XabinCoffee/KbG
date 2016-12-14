@@ -26,6 +26,8 @@ extern kam_mota;
 extern PerspCam *objKam;
 extern PerspCam *ibilKam;
 
+extern int argia;
+
 /**
  * @brief Function to draw the axes
  */
@@ -125,7 +127,18 @@ void display(void) {
     glLoadIdentity();
 
     /*First, we draw the axes*/
-    draw_axes();
+    if(argia){
+        draw_axes();
+        glEnable(GL_LIGHTING);
+    }else{
+        draw_axes();
+    }
+
+    /*Koloreak*/
+
+    GLfloat horia [4] = {0.0, 1.0, 1.0, 1.0};
+    GLfloat grisa [4] = {0.2, 0.2, 0.2, 1.0};
+    GLfloat txuria [4] = {1.0, 1.0, 1.0, 1.0};
 
 
     /*Now each of the objects in the list*/

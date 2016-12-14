@@ -129,7 +129,12 @@ struct PerspCam{
     GLdouble* begira;           /* Nora begira dagoen */
     GLdouble* gora;             /* Kamararen gora bektorea */
     struct Stack *desegin;      /* Ctrl+Z egiterakoan, desegindako aldaketak hemen gordeko dira, geroago berreskuratu nahi badira*/            
-    struct Stack *stack;    /* Aldaketa pila */
+    struct Stack *stack;        /* Aldaketa pila */
+};
+
+struct light{
+    struct Stack *stack;    /* Aldaketak gordetzeko pila */
+    int egoera;             /* Argia piztuta dagoen edo ez adierazten du*/
 };
 
 typedef struct PerspCam PerspCam;

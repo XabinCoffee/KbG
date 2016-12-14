@@ -27,6 +27,12 @@ PerspCam *objKam;
 PerspCam *ibilKam;
 GLdouble *matrix;
 
+light* bonbila;
+light* eguzkia;
+light* fokua;
+
+int argia = 0;
+
 
 char kam_mota;
 
@@ -36,6 +42,12 @@ char kam_mota;
         'i' = ibiltaria
     */
 
+char argi_mota;
+    /*
+        'e' = eguzkia;
+        'f' = fokua;
+        'b' = bonbila;
+    */
 
 char aldaketak;
 
@@ -65,6 +77,7 @@ char aldaketakObjKam;
 void gureHasieraketak(){
     /* Hasierako transformazio aldagaiak */
     kam_mota = 'o';
+    argi_mota = 'e';
     egoera = 'm';
     aldaketak = 'g';
     aldaketakObjKam = 'o';
