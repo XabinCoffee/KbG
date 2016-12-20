@@ -32,6 +32,7 @@ extern char argi_mota;
 extern light* bonbila;
 extern light* eguzkia;
 extern light* fokua;
+extern int angelua;
 
 /**
  * @brief Function to draw the axes
@@ -203,7 +204,7 @@ void display(void) {
             nora[0] = 0.0; nora[1] = -1.0; nora[2] = 0.0;
             glLightfv(GL_LIGHT2, GL_POSITION, position);
             glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, nora);
-            glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 10.0);
+            glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, angelua);
             glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 1.0);
         }
 

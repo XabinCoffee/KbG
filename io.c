@@ -29,6 +29,7 @@ extern light * bonbila;
 extern light * eguzkia;
 extern light * fokua;
 extern int argia;
+extern int angelua;
 
 int zenbat = 0;
 /**
@@ -63,6 +64,8 @@ void print_help(){
 	printf("<CTRL + Z>\t Egindako aldaketak desegiteko\n");
 	printf("<CTRL + Y>\t Desegindako aldaketak berriz aplikatzeko\n");
 	printf("<ENTER>\t\t Argiak aktibatu edo desaktibatzeko\n");
+	printf("<1, 2, 3>\t\t Bonbila, eguzkia edo fokoa aukeratzeko, berriz emanez gero argia itzali egiten da \n");
+	printf("<+> edo <->\t\t Argian aldaketak egiterakoan, fokoaren angelua handitu edo txikitu egiten da.\n");
 	printf("\n\n");
 }
 
@@ -176,38 +179,51 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 
 		case '-':
-			if (glutGetModifiers() == GLUT_ACTIVE_CTRL){ //Ctrl tekla ea zapalduta dagoen kontrolatzen du
-				/*Increase the projection plane; compute the new dimensions*/
-				wd=(_ortho_x_max-_ortho_x_min)/KG_STEP_ZOOM; //Planoaren zabalera berria hartu
-				he=(_ortho_y_max-_ortho_y_min)/KG_STEP_ZOOM; // = Altuera berria
-				/*In order to avoid moving the center of the plane, we get its coordinates*/
-				//Planoaren erdiko puntuak lortzeko
-				midx = (_ortho_x_max+_ortho_x_min)/2;
-				midy = (_ortho_y_max+_ortho_y_min)/2;
-				/*The the new limits are set, keeping the center of the plane*/
 
-				_ortho_x_max = midx + wd/2;
-				_ortho_x_min = midx - wd/2;
-				_ortho_y_max = midy + he/2;
-				_ortho_y_min = midy - he/2;
+			if (aldaketakObjKam == 'a'){
+				angelua-=3;
+			}
+			else{
+				if (glutGetModifiers() == GLUT_ACTIVE_CTRL){ //Ctrl tekla ea zapalduta dagoen kontrolatzen du
+					/*Increase the projection plane; compute the new dimensions*/
+					wd=(_ortho_x_max-_ortho_x_min)/KG_STEP_ZOOM; //Planoaren zabalera berria hartu
+					he=(_ortho_y_max-_ortho_y_min)/KG_STEP_ZOOM; // = Altuera berria
+					/*In order to avoid moving the center of the plane, we get its coordinates*/
+					//Planoaren erdiko puntuak lortzeko
+					midx = (_ortho_x_max+_ortho_x_min)/2;
+					midy = (_ortho_y_max+_ortho_y_min)/2;
+					/*The the new limits are set, keeping the center of the plane*/
+
+					_ortho_x_max = midx + wd/2;
+					_ortho_x_min = midx - wd/2;
+					_ortho_y_max = midy + he/2;
+					_ortho_y_min = midy - he/2;
+				}
 			}
 			break;
 
 		case '+':
-			//INPLEMENTA EZAZU CTRL + + KONBINAZIOAREN FUNTZIOANLITATEA
-			if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
-				/*Increase the projection plane; compute the new dimensions*/
-				//Aurreko eragiketan kamara urruntzeko zatiketa erabiltzen da, hemen biderketa nahi dugu.
-				wd=(_ortho_x_max-_ortho_x_min)*KG_STEP_ZOOM;
-				he=(_ortho_y_max-_ortho_y_min)*KG_STEP_ZOOM;
-				/*In order to avoid moving the center of the plane, we get its coordinates*/
-				midx = (_ortho_x_max+_ortho_x_min)/2;
-				midy = (_ortho_y_max+_ortho_y_min)/2;
-				/*The the new limits are set, keeping the center of the plane*/
-				_ortho_x_max = midx + wd/2;
-				_ortho_x_min = midx - wd/2;
-				_ortho_y_max = midy + he/2;
-				_ortho_y_min = midy - he/2;
+
+			if (aldaketakObjKam == 'a'){
+				angelua+=3;
+			}
+
+			else{
+				//INPLEMENTA EZAZU CTRL + + KONBINAZIOAREN FUNTZIOANLITATEA
+				if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+					/*Increase the projection plane; compute the new dimensions*/
+					//Aurreko eragiketan kamara urruntzeko zatiketa erabiltzen da, hemen biderketa nahi dugu.
+					wd=(_ortho_x_max-_ortho_x_min)*KG_STEP_ZOOM;
+					he=(_ortho_y_max-_ortho_y_min)*KG_STEP_ZOOM;
+					/*In order to avoid moving the center of the plane, we get its coordinates*/
+					midx = (_ortho_x_max+_ortho_x_min)/2;
+					midy = (_ortho_y_max+_ortho_y_min)/2;
+					/*The the new limits are set, keeping the center of the plane*/
+					_ortho_x_max = midx + wd/2;
+					_ortho_x_min = midx - wd/2;
+					_ortho_y_max = midy + he/2;
+					_ortho_y_min = midy - he/2;
+				}
 			}
 			break;
 

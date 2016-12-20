@@ -33,6 +33,8 @@ light* fokua;
 
 int argia = 0;
 
+int angelua = 20;
+
 
 char kam_mota;
 
