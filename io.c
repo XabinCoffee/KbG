@@ -224,6 +224,7 @@ void keyboard(unsigned char key, int x, int y) {
 					}
 				}
 			}
+
 			else if (aldaketakObjKam == 'k'){
 				if (kam_mota == 'b'){
 					if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
@@ -247,6 +248,39 @@ void keyboard(unsigned char key, int x, int y) {
 					eguneratu_ibilKam();
 				}
 			}
+
+			else if (aldaketakObjKam == 'a'){
+
+				if (argi_mota == 'b'){
+					if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+							if(bonbila != NULL){
+								if (bonbila->stack->size > 1){
+									Stack_Pop(bonbila->stack);
+								}
+							}
+						}
+					}
+
+				else if (argi_mota =='e'){
+					if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+							if(eguzkia != NULL){
+								if (eguzkia->stack->size > 1){
+									Stack_Pop(eguzkia->stack);
+								}
+							}
+						}
+					}
+
+				else if(argi_mota == 'f'){
+					if (glutGetModifiers() == GLUT_ACTIVE_CTRL){
+							if(fokua != NULL){
+								if (fokua->stack->size > 1){
+									Stack_Pop(fokua->stack);
+								}
+							}
+						}
+					}
+				}
 
 			break;
 
@@ -653,35 +687,76 @@ void handleSpecialKeypress(int key, int x, int y) {
 	}
 
 	if(aldaketakObjKam == 'a'){ //ARGIAREN ALDAKETAK
-		switch(key){
-			case GLUT_KEY_LEFT:
-				translazioaArgia(key);
-				break;
+		
+		if (egoera == 'm'){
 
-			case GLUT_KEY_RIGHT:
-				translazioaArgia(key);
-				break;
+			switch(key){
 
-			case GLUT_KEY_UP:
-				translazioaArgia(key);
-				break;
+				case GLUT_KEY_LEFT:
+					translazioaArgia(key);
+					break;
 
-			case GLUT_KEY_DOWN:
-				translazioaArgia(key);
-				break;
+				case GLUT_KEY_RIGHT:
+					translazioaArgia(key);
+					break;
 
-			case GLUT_KEY_PAGE_UP:
-				translazioaArgia(key);
-				break;
+				case GLUT_KEY_UP:
+					translazioaArgia(key);
+					break;
 
-			case GLUT_KEY_PAGE_DOWN:
-				translazioaArgia(key);
-				break;
+				case GLUT_KEY_DOWN:
+					translazioaArgia(key);
+					break;
 
-			default: 
-				break;
+				case GLUT_KEY_PAGE_UP:
+					translazioaArgia(key);
+					break;
+
+				case GLUT_KEY_PAGE_DOWN:
+					translazioaArgia(key);
+					break;
+
+				default: 
+					break;
+
+			}
+		}
+
+		else {
+
+			switch(key){
+
+				case GLUT_KEY_LEFT:
+					biraketaArgia(key);
+					break;
+
+				case GLUT_KEY_RIGHT:
+					biraketaArgia(key);
+					break;
+
+				case GLUT_KEY_UP:
+					biraketaArgia(key);
+					break;
+
+				case GLUT_KEY_DOWN:
+					biraketaArgia(key);
+					break;
+
+				case GLUT_KEY_PAGE_UP:
+					biraketaArgia(key);
+					break;
+
+				case GLUT_KEY_PAGE_DOWN:
+					biraketaArgia(key);
+					break;
+
+				default: 
+					break;
+
+			}
 
 		}
+
 	}
 
 

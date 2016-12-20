@@ -411,6 +411,68 @@ void biraketaKam(int tekla, char ref_sys){
 }
 
 
+void biraketaArgia(int tekla){
+	GLdouble * m = malloc(sizeof(GLdouble)*16);
+
+	/*  IDENTITATE MATRIZEA
+		1  0  0  0
+		0  1  0  0
+		0  0  1  0
+		0  0  0  1
+	*/
+	m[0] = 1;  m[4] = 0;  m[8] = 0;  m[12] = 0;
+	m[1] = 0;  m[5] = 1;  m[9] = 0;  m[13] = 0;
+	m[2] = 0;  m[6] = 0;  m[10] = 1;  m[14] = 0;
+	m[3] = 0;  m[7] = 0;  m[11] = 0;  m[15] = 1;
+
+	//Teklaren arabera aldatu matrizea
+	switch(tekla){
+		case GLUT_KEY_UP: //tekla gora
+			m[5] = cos(M_PI/8);
+			m[6] = sin(M_PI/8);
+			m[9] = -sin(M_PI/8);
+			m[10] = cos(M_PI/8);
+			break;
+		case GLUT_KEY_DOWN: //tekla behera
+			m[5] = cos(-M_PI/8);
+			m[6] = sin(-M_PI/8);
+			m[9] = sin(M_PI/8);
+			m[10] = cos(-M_PI/8);
+			break;
+		case GLUT_KEY_LEFT: //tekla ezkerrera
+			m[0] = cos(-M_PI/8);
+			m[2] = sin(M_PI/8);
+			m[8] = sin(-M_PI/8);
+			m[10] = cos(-M_PI/8);
+			break;
+		case GLUT_KEY_RIGHT: //tekla eskubira
+			m[0] = cos(M_PI/8);
+			m[2] = -sin(M_PI/8);
+			m[8] = sin(M_PI/8);
+			m[10] = cos(M_PI/8);
+			break;
+		case GLUT_KEY_PAGE_UP:
+			m[0] = cos(M_PI/8);
+			m[1] = sin(M_PI/8);
+			m[4] = -sin(M_PI/8);
+			m[5] = cos(M_PI/8);
+			break;
+		case GLUT_KEY_PAGE_DOWN:
+			m[0] = cos(-M_PI/8);
+			m[1] = sin(-M_PI/8);
+			m[4] = sin(M_PI/8);
+			m[5] = cos(-M_PI/8);
+			break;
+	}
+
+	if (argi_mota=='b') Stack_Push(bonbila-> stack,biderkatuArgia(bonbila->stack,m)); 
+	else if (argi_mota == 'e') Stack_Push(eguzkia-> stack,biderkatuArgia(eguzkia->stack,m));
+	else if (argi_mota == 'f') Stack_Push(fokua-> stack,biderkatuArgia(fokua->stack,m));
+
+	
+}
+
+
 void eskalatu(int tekla, char ref_sys){
 	GLdouble * m = malloc(sizeof(GLdouble)*16);
 
