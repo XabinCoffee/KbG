@@ -27,6 +27,11 @@ extern PerspCam *objKam;
 extern PerspCam *ibilKam;
 
 extern int argia;
+extern char argi_mota;
+
+extern light* bonbila;
+extern light* eguzkia;
+extern light* fokua;
 
 /**
  * @brief Function to draw the axes
@@ -119,12 +124,22 @@ void display(void) {
     /* Define the projection */
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-
+    if(argia) glDisable(GL_LIGHTING);
     kamaraKokatu();
 
     /* Now we start drawing the object */
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+
+    /*Koloreak*/
+
+    GLfloat horia [4] = {0.0, 1.0, 1.0, 1.0};
+    GLfloat grisa [4] = {0.2, 0.2, 0.2, 1.0};
+    GLfloat txuria [4] = {1.0, 1.0, 1.0, 1.0};
+
+    GLfloat ambiente[4] = {0.19125, 0.0735, 0.0225, 1.0};
+    GLfloat difuso[4] = {0.7038, 0.27048, 0.0828, 1.0};
+    GLfloat especular[4] = {0.256777, 0.137622, 0.0806014, 1.0};
 
     /*First, we draw the axes*/
     if(argia){
@@ -134,12 +149,65 @@ void display(void) {
         draw_axes();
     }
 
-    /*Koloreak*/
+    GLfloat *position = malloc(sizeof(GLfloat)*4);
+    GLfloat *nora = malloc(sizeof(GLfloat)*4);
+    glLoadIdentity();
 
-    GLfloat horia [4] = {0.0, 1.0, 1.0, 1.0};
-    GLfloat grisa [4] = {0.2, 0.2, 0.2, 1.0};
-    GLfloat txuria [4] = {1.0, 1.0, 1.0, 1.0};
+    if(argia){
+        if (argi_mota == 'b') glMultMatrixd(Stack_Top(bonbila->stack));
+        else if (argi_mota == 'e') glMultMatrixd(Stack_Top(eguzkia->stack));
+        else if (argi_mota == 'f') glMultMatrixd(Stack_Top(fokua->stack));
 
+        glLightfv(GL_LIGHT0 , GL_AMBIENT , grisa );
+        glLightfv(GL_LIGHT0 , GL_DIFFUSE , horia );
+        glLightfv(GL_LIGHT0 , GL_SPECULAR , txuria );
+        glLightfv(GL_LIGHT1 , GL_AMBIENT , grisa );
+        glLightfv(GL_LIGHT1 , GL_DIFFUSE , horia );
+        glLightfv(GL_LIGHT1 , GL_SPECULAR , txuria );
+        glLightfv(GL_LIGHT2 , GL_AMBIENT , grisa );
+        glLightfv(GL_LIGHT2 , GL_DIFFUSE , horia );
+        glLightfv(GL_LIGHT2 , GL_SPECULAR , txuria );
+        glMaterialfv(GL_LIGHT0,GL_AMBIENT,ambiente);
+        glMaterialfv(GL_LIGHT0,GL_DIFFUSE,difuso);
+        glMaterialfv(GL_LIGHT0,GL_SPECULAR,especular);
+        glMaterialf(GL_LIGHT0,GL_SHININESS, 0.6);
+        glLightf(GL_LIGHT0,GL_CONSTANT_ATTENUATION, 1.0);
+        glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.0);
+        glLightf(GL_LIGHT0,GL_QUADRATIC_ATTENUATION, 0.8);
+        glMaterialfv(GL_LIGHT1,GL_AMBIENT,ambiente);
+        glMaterialfv(GL_LIGHT1,GL_DIFFUSE,difuso);
+        glMaterialfv(GL_LIGHT1,GL_SPECULAR,especular);
+        glMaterialf(GL_LIGHT1,GL_SHININESS, 0.6);
+        glLightf(GL_LIGHT1,GL_CONSTANT_ATTENUATION, 1.0);
+        glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.0);
+        glLightf(GL_LIGHT1,GL_QUADRATIC_ATTENUATION, 0.0);
+        glMaterialfv(GL_LIGHT2,GL_AMBIENT,ambiente);
+        glMaterialfv(GL_LIGHT2,GL_DIFFUSE,difuso);
+        glMaterialfv(GL_LIGHT2,GL_SPECULAR,especular);
+        glMaterialf(GL_LIGHT2,GL_SHININESS, 0.6);
+        glLightf(GL_LIGHT2,GL_CONSTANT_ATTENUATION, 1.0);
+        glLightf(GL_LIGHT2, GL_LINEAR_ATTENUATION, 0.0);
+        glLightf(GL_LIGHT2,GL_QUADRATIC_ATTENUATION, 0.0);
+
+        if (argi_mota == 'b'){
+            position[0] = 0.0; position[1] = 2.0; position[2] = 0.0; position[3] = 1.0;
+            glLightfv(GL_LIGHT0, GL_POSITION, position);
+            glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 180.0);
+        }
+        else if (argi_mota == 'e'){
+            position[0] = 1.0; position[1] = 0.0; position[2] = 0.0; position[3] = 0.0;
+            glLightfv(GL_LIGHT1, GL_POSITION, position);
+        }
+        else if (argi_mota == 'f'){
+            position[0] = 0.0; position[1] = 10.0; position[2] = 0.0; position[3] = 1.0;
+            nora[0] = 0.0; nora[1] = -1.0; nora[2] = 0.0;
+            glLightfv(GL_LIGHT2, GL_POSITION, position);
+            glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, nora);
+            glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 10.0);
+            glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 1.0);
+        }
+
+    }
 
     /*Now each of the objects in the list*/
     while (aux_obj != 0) {

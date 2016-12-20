@@ -132,11 +132,15 @@ struct PerspCam{
     struct Stack *stack;        /* Aldaketa pila */
 };
 
+
+typedef struct PerspCam PerspCam;
+
 struct light{
     struct Stack *stack;    /* Aldaketak gordetzeko pila */
     int egoera;             /* Argia piztuta dagoen edo ez adierazten du*/
 };
 
-typedef struct PerspCam PerspCam;
+typedef struct light light;
+
 
 #endif // DEFINITIONS_H

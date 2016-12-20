@@ -10,7 +10,10 @@ extern object3d * _selected_object;
 extern PerspCam *objKam;
 extern PerspCam *ibilKam;
 extern char kam_mota;
-
+extern light * bonbila;
+extern light * eguzkia;
+extern light * fokua;
+extern char argi_mota;
 
 
 
@@ -109,6 +112,21 @@ GLdouble* biderkatuKam(GLdouble * transformazioa){
 	return biderkatuta;
 }
 
+GLdouble* biderkatuArgia(Stack * p, GLdouble * transformazioa){
+	GLdouble * biderkatuta = malloc(sizeof(GLdouble)*16);
+	GLdouble * stackTop = Stack_Top(p);
+	int i, j;
+	int k = 0;
+
+	for(i = 0;i<16;i+=4){
+		for(j=0;j<4;j++){
+			biderkatuta[k] = stackTop[i]*transformazioa[j]+stackTop[i+1]*transformazioa[j+4]+stackTop[i+2]*transformazioa[j+8]+stackTop[i+3]*transformazioa[j+12];
+			k++;
+		}
+	}
+	return biderkatuta;
+}
+
 
 GLdouble* biderkatuLokalki(GLdouble * transformazioa){
 	GLdouble * biderkatuta = malloc(sizeof(GLdouble)*16);
@@ -141,6 +159,51 @@ GLdouble* biderkatuKamLokalki(GLdouble * transformazioa){
 	}
 	return biderkatuta;
 }
+
+
+void translazioaArgia(int tekla){
+	GLdouble * m = malloc(sizeof(GLdouble)*16);
+
+	/*  IDENTITATE MATRIZEA
+		1  0  0  0
+		0  1  0  0
+		0  0  1  0
+		0  0  0  1
+	*/
+		
+	m[0] = 1;  m[4] = 0;  m[8] = 0;  m[12] = 0;
+	m[1] = 0;  m[5] = 1;  m[9] = 0;  m[13] = 0;
+	m[2] = 0;  m[6] = 0;  m[10] = 1;  m[14] = 0;
+	m[3] = 0;  m[7] = 0;  m[11] = 0;  m[15] = 1;
+
+	// Teklaren arabera aldatu matrizea
+	switch(tekla){
+		case GLUT_KEY_UP: //Tekla gora
+			m[13] = 1;
+			break;
+		case GLUT_KEY_DOWN: //Tekla bera
+			m[13] = -1;
+			break;
+		case GLUT_KEY_LEFT: //Tekla ezkerrera
+			m[12] = -1;
+			break;
+		case GLUT_KEY_RIGHT: //Tekla eskubira
+			m[12] = 1;
+			break;
+		case GLUT_KEY_PAGE_UP:
+			m[14] = 1;
+			break;
+		case GLUT_KEY_PAGE_DOWN:
+			m[14] = -1;
+			break;
+	}
+
+
+	if (argi_mota=='b') Stack_Push(bonbila-> stack,biderkatuArgia(bonbila->stack,m)); 
+	else if (argi_mota == 'e') Stack_Push(eguzkia-> stack,biderkatuArgia(eguzkia->stack,m));
+	else if (argi_mota == 'f') Stack_Push(fokua-> stack,biderkatuArgia(fokua->stack,m));
+
+	}
 
 void translazioa(int tekla, char ref_sys){
 	GLdouble * m = malloc(sizeof(GLdouble)*16);

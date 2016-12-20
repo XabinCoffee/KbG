@@ -70,6 +70,7 @@ char aldaketakObjKam;
     /*
         'o' = Aldaketak objetuari
         'k' = Aldaketak kamarari
+        'a' = Aldaketak argiari
         
     */
 
@@ -151,6 +152,34 @@ void gureHasieraketak(){
 
 }
 
+void argiakHasieratu(){
+    bonbila = malloc(sizeof(light));
+    eguzkia = malloc(sizeof(light));
+    fokua = malloc(sizeof(light));
+
+    Stack *p = malloc(sizeof(Stack));
+    Stack_Init(p);
+
+    bonbila->stack = p;
+    eguzkia->stack = p;
+    fokua->stack = p;
+
+    bonbila->egoera = 0;
+    eguzkia->egoera = 0;
+    fokua->egoera = 0;
+
+    GLdouble *argimatrix = malloc(sizeof(GLdouble)*16);
+    argimatrix[0] = 1; argimatrix[4] = 0;  argimatrix[8] = 0; argimatrix[12] = 0; 
+    argimatrix[1] = 0; argimatrix[5] = 1;  argimatrix[9] = 0; argimatrix[13] = 0; 
+    argimatrix[2] = 0; argimatrix[6] = 0;  argimatrix[10] = 1; argimatrix[14] = 0; 
+    argimatrix[3] = 0; argimatrix[7] = 0;  argimatrix[11] = 0; argimatrix[15] = 1; 
+
+    Stack_Push(bonbila->stack, argimatrix);
+    Stack_Push(eguzkia->stack, argimatrix);
+    Stack_Push(fokua->stack, argimatrix);
+
+}
+
 /** GENERAL INITIALIZATION **/
 void initialization (){
 
@@ -171,6 +200,7 @@ void initialization (){
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     gureHasieraketak(); //Transformazioak eta kamara hasieratzeko
+    argiakHasieratu(); //Argiak hasieratzeko ID matrizearekin eta 0 egoerarekin
 
 }
 

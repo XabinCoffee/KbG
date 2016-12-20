@@ -24,6 +24,12 @@ extern char aldaketakObjKam;
 extern PerspCam *objKam;
 extern PerspCam *ibilKam;
 
+extern char argi_mota;
+extern light * bonbila;
+extern light * eguzkia;
+extern light * fokua;
+extern int argia;
+
 int zenbat = 0;
 /**
  * @brief This function just prints information about the use
@@ -45,14 +51,18 @@ void print_help(){
 	printf("<DEL>\t\t Hautatutako objektua ezabatu\n");
 	printf("<CTRL + ->\t Bistaratze-eremua handitu\n");
 	printf("<CTRL + +>\t Bistaratze-eremua txikitu\n");
+	printf("<O> edo <o>\t Aldaketak objetuari egiteko \n");
 	printf("<I> edo <i>\t Objektuaren informazioa ikusteko \n");
 	printf("<M> edo <m>\t Mugitzeko\n");
 	printf("<B> edo <b>\t Biratzeko\n");
 	printf("<T> edo <t>\t Eskalatzeko\n");
+	printf("<K> edo <k>\t Aldaketak kamarari egiteko \n");
+	printf("<C> edo <c>\t Kamara mota aldatzeko\n");
 	printf("<G> edo <g>\t Aldaketak modu globalean egiteko\n");
 	printf("<L> edo <l>\t Aldaketak objetuaren erreferentzi sistema beran egiteko\n");
 	printf("<CTRL + Z>\t Egindako aldaketak desegiteko\n");
 	printf("<CTRL + Y>\t Desegindako aldaketak berriz aplikatzeko\n");
+	printf("<ENTER>\t\t Argiak aktibatu edo desaktibatzeko\n");
 	printf("\n\n");
 }
 
@@ -374,6 +384,83 @@ void keyboard(unsigned char key, int x, int y) {
 			printf("Aldaketak kamarari aplikatuko zaizkio \n");
 			break;
 
+
+		case 13:
+			if (!argia){
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+				argia = 1;
+				glEnable(GL_LIGHTING);
+				printf("Argiak piztuta \n");
+			} 
+			else {
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+				argia = 0;
+				glDisable(GL_LIGHTING);
+				printf("Argiak itzalita \n");
+			}
+			break;
+
+
+		case 49: //F1, hau da, bonbila
+			if (argi_mota == 'b') {
+				argi_mota = 'x';
+				glDisable(GL_LIGHT0);
+			}
+			else{
+				argi_mota = 'b';
+				bonbila->egoera = 1;
+				eguzkia->egoera = 0;
+				fokua->egoera = 0;
+				glEnable(GL_LIGHT0);
+				glDisable(GL_LIGHT1);
+				glDisable(GL_LIGHT2);
+				printf("Bonbila piztuta \n");
+			}
+			break;
+
+		case 50: //F2, eguzkia
+			if (argi_mota == 'e') {
+				argi_mota = 'x';
+				glDisable(GL_LIGHT1);
+			}
+			else {
+				argi_mota = 'e';
+				eguzkia->egoera = 1;
+				bonbila->egoera = 0;
+				fokua->egoera = 0;
+				glEnable(GL_LIGHT1);
+				glDisable(GL_LIGHT0);
+				glDisable(GL_LIGHT2);
+				printf("Eguzkia piztuta \n");
+			}
+			break;
+
+		case 51: //F3, fokua
+			if (argi_mota == 'f') {
+				argi_mota = 'x';
+				glDisable(GL_LIGHT2);
+			}
+			else{
+				argi_mota = 'f';
+				fokua->egoera = 1;
+				eguzkia->egoera = 0;
+				bonbila->egoera = 0;
+				glEnable(GL_LIGHT2);
+				glDisable(GL_LIGHT0);
+				glDisable(GL_LIGHT1);
+				printf("Fokua piztuta \n");
+			}
+			break;
+
+		case 97: //<a>
+		case 65: //<A>
+			if (aldaketakObjKam!='a'){
+				aldaketakObjKam = 'a';
+				printf("Aldaketak argiari \n");
+			}
+				
+			break;
+
 		default:
 			/*In the default case we just print the code of the key. This is usefull to define new cases*/
 			printf("%d %c\n", key, key);
@@ -565,6 +652,38 @@ void handleSpecialKeypress(int key, int x, int y) {
 		}
 	}
 
+	if(aldaketakObjKam == 'a'){ //ARGIAREN ALDAKETAK
+		switch(key){
+			case GLUT_KEY_LEFT:
+				translazioaArgia(key);
+				break;
+
+			case GLUT_KEY_RIGHT:
+				translazioaArgia(key);
+				break;
+
+			case GLUT_KEY_UP:
+				translazioaArgia(key);
+				break;
+
+			case GLUT_KEY_DOWN:
+				translazioaArgia(key);
+				break;
+
+			case GLUT_KEY_PAGE_UP:
+				translazioaArgia(key);
+				break;
+
+			case GLUT_KEY_PAGE_DOWN:
+				translazioaArgia(key);
+				break;
+
+			default: 
+				break;
+
+		}
+	}
+
 
 	if (aldaketakObjKam == 'k'){
 
@@ -609,7 +728,6 @@ void handleSpecialKeypress(int key, int x, int y) {
 						break;
 
 				}
-
 			}
 
 			if (egoera == 'b'){
