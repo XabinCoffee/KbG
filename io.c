@@ -695,6 +695,57 @@ void handleSpecialKeypress(int key, int x, int y) {
 					Stack_Init(_selected_object->desegin);
 				}
 				break;
+			case GLUT_KEY_F1: //kobre
+				if(!materialaJarrita){
+    				GLfloat ambiente[4] = {0.19125, 0.0735, 0.0225, 1.0};
+    				GLfloat difuso[4] = {0.7038, 0.27048, 0.0828, 1.0};
+    				GLfloat especular[4] = {0.256777, 0.137622, 0.0806014, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.1);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+
+				break;
+			case GLUT_KEY_F2: //esmeralda
+				if(!materialaJarrita){
+					GLfloat ambiente[4] = {0.0215, 0.1745, 0.0215, 1.0};
+    				GLfloat difuso[4] = {0.07568, 0.61424, 0.07568, 1.0};
+    				GLfloat especular[4] = {0.633, 0.727811, 0.633, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+				break;
+
+			case GLUT_KEY_F3: // Rubi
+				if(!materialaJarrita){
+					GLfloat ambiente[4] = {0.05, 0.05, 0.0, 1.0};
+    				GLfloat difuso[4] = {0.5, 0.5, 0.4, 1.0};
+    				GLfloat especular[4] = {0.7, 0.7, 0.04, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.078125);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}
+				else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+				break;
 			}
 		}
 
@@ -751,6 +802,57 @@ void handleSpecialKeypress(int key, int x, int y) {
 					Stack_Init(_selected_object->desegin);
 				}
 				break;
+			case GLUT_KEY_F1: //kobre
+				if(!materialaJarrita){
+    				GLfloat ambiente[4] = {0.19125, 0.0735, 0.0225, 1.0};
+    				GLfloat difuso[4] = {0.7038, 0.27048, 0.0828, 1.0};
+    				GLfloat especular[4] = {0.256777, 0.137622, 0.0806014, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.1);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+
+				break;
+			case GLUT_KEY_F2: //esmeralda
+				if(!materialaJarrita){
+					GLfloat ambiente[4] = {0.0215, 0.1745, 0.0215, 1.0};
+    				GLfloat difuso[4] = {0.07568, 0.61424, 0.07568, 1.0};
+    				GLfloat especular[4] = {0.633, 0.727811, 0.633, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+				break;
+
+			case GLUT_KEY_F3: // Rubi
+				if(!materialaJarrita){
+					GLfloat ambiente[4] = {0.05, 0.05, 0.0, 1.0};
+    				GLfloat difuso[4] = {0.5, 0.5, 0.4, 1.0};
+    				GLfloat especular[4] = {0.7, 0.7, 0.04, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.078125);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}
+				else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+				break;
 			}
 		}
 	}
@@ -785,6 +887,58 @@ void handleSpecialKeypress(int key, int x, int y) {
 					translazioaArgia(key);
 					break;
 
+				case GLUT_KEY_F1: //kobre
+				if(!materialaJarrita){
+    				GLfloat ambiente[4] = {0.19125, 0.0735, 0.0225, 1.0};
+    				GLfloat difuso[4] = {0.7038, 0.27048, 0.0828, 1.0};
+    				GLfloat especular[4] = {0.256777, 0.137622, 0.0806014, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.1);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+
+				break;
+			case GLUT_KEY_F2: //esmeralda
+				if(!materialaJarrita){
+					GLfloat ambiente[4] = {0.0215, 0.1745, 0.0215, 1.0};
+    				GLfloat difuso[4] = {0.07568, 0.61424, 0.07568, 1.0};
+    				GLfloat especular[4] = {0.633, 0.727811, 0.633, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+				break;
+
+			case GLUT_KEY_F3: // Rubi
+				if(!materialaJarrita){
+					GLfloat ambiente[4] = {0.05, 0.05, 0.0, 1.0};
+    				GLfloat difuso[4] = {0.5, 0.5, 0.4, 1.0};
+    				GLfloat especular[4] = {0.7, 0.7, 0.04, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.078125);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}
+				else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+				break;
+
 				default: 
 					break;
 
@@ -818,6 +972,58 @@ void handleSpecialKeypress(int key, int x, int y) {
 				case GLUT_KEY_PAGE_DOWN:
 					biraketaArgia(key);
 					break;
+
+				case GLUT_KEY_F1: //kobre
+				if(!materialaJarrita){
+    				GLfloat ambiente[4] = {0.19125, 0.0735, 0.0225, 1.0};
+    				GLfloat difuso[4] = {0.7038, 0.27048, 0.0828, 1.0};
+    				GLfloat especular[4] = {0.256777, 0.137622, 0.0806014, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.1);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+
+				break;
+			case GLUT_KEY_F2: //esmeralda
+				if(!materialaJarrita){
+					GLfloat ambiente[4] = {0.0215, 0.1745, 0.0215, 1.0};
+    				GLfloat difuso[4] = {0.07568, 0.61424, 0.07568, 1.0};
+    				GLfloat especular[4] = {0.633, 0.727811, 0.633, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+				break;
+
+			case GLUT_KEY_F3: // Rubi
+				if(!materialaJarrita){
+					GLfloat ambiente[4] = {0.05, 0.05, 0.0, 1.0};
+    				GLfloat difuso[4] = {0.5, 0.5, 0.4, 1.0};
+    				GLfloat especular[4] = {0.7, 0.7, 0.04, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.078125);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}
+				else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+				break;
 
 				default: 
 					break;
@@ -868,6 +1074,58 @@ void handleSpecialKeypress(int key, int x, int y) {
 						Stack_Init(objKam->desegin);
 						break;
 
+					case GLUT_KEY_F1: //kobre
+				if(!materialaJarrita){
+    				GLfloat ambiente[4] = {0.19125, 0.0735, 0.0225, 1.0};
+    				GLfloat difuso[4] = {0.7038, 0.27048, 0.0828, 1.0};
+    				GLfloat especular[4] = {0.256777, 0.137622, 0.0806014, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.1);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+
+				break;
+			case GLUT_KEY_F2: //esmeralda
+				if(!materialaJarrita){
+					GLfloat ambiente[4] = {0.0215, 0.1745, 0.0215, 1.0};
+    				GLfloat difuso[4] = {0.07568, 0.61424, 0.07568, 1.0};
+    				GLfloat especular[4] = {0.633, 0.727811, 0.633, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+				break;
+
+			case GLUT_KEY_F3: // Rubi
+				if(!materialaJarrita){
+					GLfloat ambiente[4] = {0.05, 0.05, 0.0, 1.0};
+    				GLfloat difuso[4] = {0.5, 0.5, 0.4, 1.0};
+    				GLfloat especular[4] = {0.7, 0.7, 0.04, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.078125);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}
+				else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+				break;
+
 					default: 
 						break;
 
@@ -907,6 +1165,58 @@ void handleSpecialKeypress(int key, int x, int y) {
 						biraketaKam(key, aldaketak);
 						Stack_Init(objKam->desegin);
 						break;
+
+					case GLUT_KEY_F1: //kobre
+				if(!materialaJarrita){
+    				GLfloat ambiente[4] = {0.19125, 0.0735, 0.0225, 1.0};
+    				GLfloat difuso[4] = {0.7038, 0.27048, 0.0828, 1.0};
+    				GLfloat especular[4] = {0.256777, 0.137622, 0.0806014, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.1);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+
+				break;
+			case GLUT_KEY_F2: //esmeralda
+				if(!materialaJarrita){
+					GLfloat ambiente[4] = {0.0215, 0.1745, 0.0215, 1.0};
+    				GLfloat difuso[4] = {0.07568, 0.61424, 0.07568, 1.0};
+    				GLfloat especular[4] = {0.633, 0.727811, 0.633, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+				break;
+
+			case GLUT_KEY_F3: // Rubi
+				if(!materialaJarrita){
+					GLfloat ambiente[4] = {0.05, 0.05, 0.0, 1.0};
+    				GLfloat difuso[4] = {0.5, 0.5, 0.4, 1.0};
+    				GLfloat especular[4] = {0.7, 0.7, 0.04, 1.0};
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambiente);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, difuso);
+    				glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especular);
+    				glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.078125);
+					glEnable(GL_COLOR_MATERIAL);
+					materialaJarrita = 1;
+				}
+				else{
+					glDisable(GL_COLOR_MATERIAL);
+					materialaJarrita = 0;
+				}
+				break;
 
 					default: 
 						break;
@@ -962,17 +1272,9 @@ void handleSpecialKeypress(int key, int x, int y) {
 						break;
 
 			}
-
 		eguneratu_ibilKam();
-
-
 		}
-
-
-
 	}
-
-
 	/*Zerbait berria marraztu behar badu marrazteko*/
 	glutPostRedisplay();
 }
